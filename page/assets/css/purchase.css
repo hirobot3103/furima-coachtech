@@ -145,6 +145,15 @@ body {
     height: 7vw;
 }
 
+
+.method__form .select-triangle {
+    position: absolute;
+    top: 2.8vw;
+    left:20.12vw;
+    width: 2vw;
+    height: 2vw;
+}
+
 .method__form .select-method {
     position: absolute;
     top: 3vw;
