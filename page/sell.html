@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furima 商品出品画面</title>
+
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/sell.css">
+    
+</head>
+<body>
+    <header class="page-header">
+        <div class="page-logo">
+            <img src="./assets/img/logo.svg" alt="ロゴ COACHTECH">
+        </div>
+        <form action="" class="page-search">
+            <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？">
+        </form>
+        <nav class="page-menu">
+            <ul>
+                <li><a href="">ログイン</a></li>
+                <li><a href="">マイページ</a></li>
+                <li><a class="page-menu__listing" href="">出品</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contents">
+        <div class="contents-area">
+            <p class="sell-title">商品の出品</p>
+            <form class="sell-form" action="">
+                <section class="uploader-area">
+                    <p>商品画像</p>
+                    <label for="file-uploader-btn" class="uploder-label">画像を選択する</label>
+                    <input type="file" name="uploadfile" id="file-uploader-btn" class="file-uploader-btn" >
+                </section>
+                <section class="item-detail-area">
+                    <p class="detail-title">商品の詳細</p>
+                    <hr>
+                    <p>カテゴリー</p>
+                    <div class="categori-area">
+                        <input type="checkbox" name="cat1" id="cat1" value="1">
+                        <label for="cat1" class="cat-label">ファッション</label>
+                        <input type="checkbox" name="cat2" id="cat2" value="2">
+                        <label for="cat2" class="cat-label">家電</label>
+                        <input type="checkbox" name="cat3" id="cat3" value="3">
+                        <label for="cat3" class="cat-label">インテリア</label>
+                        <input type="checkbox" name="cat4" id="cat4" value="4">
+                        <label for="cat4" class="cat-label">レディース</label>
+                        <input type="checkbox" name="cat5" id="cat5" value="5">
+                        <label for="cat5" class="cat-label">メンズ</label>
+                        <input type="checkbox" name="cat6" id="cat6" value="6">
+                        <label for="cat6" class="cat-label">コスメ</label>
+                        <input type="checkbox" name="cat7" id="cat7" value="7">
+                        <label for="cat7" class="cat-label">本</label>
+                        <input type="checkbox" name="cat8" id="cat8" value="8">
+                        <label for="cat8" class="cat-label">ゲーム</label>
+                        <input type="checkbox" name="cat9" id="cat9" value="9">
+                        <label for="cat9" class="cat-label">スポーツ</label>
+                        <input type="checkbox" name="cat10" id="cat10" value="10">
+                        <label for="cat10" class="cat-label">キッチン</label>
+                        <input type="checkbox" name="cat11" id="cat11" value="11">
+                        <label for="cat11" class="cat-label">ハンドメイド</label>
+                        <input type="checkbox" name="cat12" id="cat12" value="12">
+                        <label for="cat12" class="cat-label">アクセサリー</label>
+                        <input type="checkbox" name="cat13" id="cat13" value="13">
+                        <label for="cat13" class="cat-label">おもちゃ</label>
+                        <input type="checkbox" name="cat14" id="cat14" value="14">
+                        <label for="cat14" class="cat-label">ベビー・キッズ</label>
+                    </div>
+                    <p>商品の状態</p>
+                    <div class="item-status-area">
+                        <div class="select-triangle">&#x25BD;</div>
+                        <select name="status" id="" class="status__select">
+                            <option value="0" selected disabled>選択してください</option>
+                            <option value="1">良好</option>
+                            <option value="2">目立った傷や汚れなし</option>
+                            <option value="3">やや傷や汚れあり</option>
+                            <option value="4">状態が悪い</option>
+                        </select>
+                    </div>
+                    <p class="item-title">商品名と説明</p>
+                    <hr>
+                    <p class="iteme-name-title">商品名</p>
+                    <input type="text" class="item-name" name="item-name">
+
+                    <p class="iteme-name-title">商品の説明</p>
+                    <textarea name="item-discript" id="item-discript" class="item-discript">
+
+                    </textarea>
+
+                    <p class="iteme-name-title">販売価格</p>
+                    <input type="text" class="item-prace" name="item-prise" placeholder="&yen;">
+                </section>
+                <button class="item-post-btn" type="submit">出品する</button>
+            </form>
+        </div>   
+    </main>
+</body>
+</html>
