@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('address',255);
             $table->string('builing',255);
             $table->string('img_url',255);
-            $table->timestamp('create_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });
     }

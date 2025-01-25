@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('soldout');
             $table->foreignId('status')->constrained('status_lists');
             $table->string('img_url',255);
-            $table->timestamp('create_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
        });
     }

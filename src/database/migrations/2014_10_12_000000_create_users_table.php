@@ -15,13 +15,14 @@ return new class extends Migration
             $table->string('password', 255);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
-            $table->timestamp('create_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });
     }
 
     public function down(): void
     {
+        Schema::dropIfExists('items');
         Schema::dropIfExists('users');
     }
 };
