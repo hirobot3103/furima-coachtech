@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('item_id')->constrained('items');
             $table->foreignId('category_id')->constrained('category_lists');
-            $table->timestamp('create_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });
     }

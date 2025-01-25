@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
@@ -11,6 +12,7 @@ class ItemsTableSeeder extends Seeder
 
     public function run(): void
     {
+
         // user_id:1 が14商品すべてを出品しているデータを作成
         $params = [
             [
@@ -20,7 +22,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => 'スタイリッシュなデザインのメンズ腕時計',
                 'soldout' => 0,
                 'status' => 1,
-                'img_url' => '',
+                'img_url' => Storage::url('Armani+Mens+Clock.jpg'),
             ],
             [
                 'user_id' => 1,
@@ -29,7 +31,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => '高速で信頼性の高いハードディスク',
                 'soldout' => 0,
                 'status' => 2,
-                'img_url' => '',
+                'img_url' => Storage::url('HDD+Hard+Disk.jpg'),
             ],
             [
                 'user_id' => 1,
@@ -38,7 +40,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => '新鮮な玉ねぎ3束のセット',
                 'soldout' => 0,
                 'status' => 3,
-                'img_url' => '',
+                'img_url' => Storage::url('iLoveIMG+d.jpg'),
             ],
             [
                 'user_id' => 1,
@@ -47,7 +49,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => 'クラシックなデザインの革靴',
                 'soldout' => 0,
                 'status' => 4,
-                'img_url' => '',
+                'img_url' => Storage::url('Leather+Shoes+Product+Photo.jpg'),
             ],
             [
                 'user_id' => 1,
@@ -56,7 +58,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => '高性能なノートパソコン',
                 'soldout' => 0,
                 'status' => 1,
-                'img_url' => '',
+                'img_url' => Storage::url('Living+Room+Laptop.jpg'),
             ],
             [
                 'user_id' => 1,
@@ -65,7 +67,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => '高音質のレコーディング用マイク',
                 'soldout' => 0,
                 'status' => 2,
-                'img_url' => '',
+                'img_url' => Storage::url('Music+Mic+4632231.jpg'),
             ],
             [
                 'user_id' => 1,
@@ -74,7 +76,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => 'おしゃれなショルダーバッグ',
                 'soldout' => 0,
                 'status' => 3,
-                'img_url' => '',
+                'img_url' => Storage::url('Purse+fashion+pocket.jpg'),
             ],
             [
                 'user_id' => 1,
@@ -83,7 +85,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => '使いやすいタンブラー',
                 'soldout' => 0,
                 'status' => 4,
-                'img_url' => '',
+                'img_url' => Storage::url('Tumbler+souvenir.jpg'),
             ],
             [
                 'user_id' => 1,
@@ -92,7 +94,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => '手動のコーヒーミル',
                 'soldout' => 0,
                 'status' => 1,
-                'img_url' => '',
+                'img_url' => Storage::url('Waitress+with+Coffee+Grinder.jpg'),
             ],
             [
                 'user_id' => 1,
@@ -101,7 +103,7 @@ class ItemsTableSeeder extends Seeder
                 'discription' => '便利なメイクアップセット',
                 'soldout' => 0,
                 'status' => 2,
-                'img_url' => '',
+                'img_url' => Storage::url('外出メイクアップセット.jpg'),
             ],
         ];
 
