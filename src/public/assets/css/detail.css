@@ -7,6 +7,10 @@
     --hd-serch-bgcolor: #fff;
     --hd-menu-btn-forecolor: #000;
     --hd-menu-btn-bgcolor: #fff;
+
+    --main-page-forecolor: #5f5f5f;
+    --main-bgcolor: #fff;
+    --main-current-page: #ff0000;
 }
 
 body {

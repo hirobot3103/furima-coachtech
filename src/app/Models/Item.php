@@ -19,8 +19,13 @@ class Item extends Model
         'img_url',
     ];
 
-    public function User()
+    public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function status_list()
+    {       
+        return $this->belongsTo('App\Models\Status_list', 'status');
     }
 }

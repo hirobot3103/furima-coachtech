@@ -46,9 +46,10 @@
                         $soldout_class = "item-sold-out__img";
                     @endphp
                 @endif
-                
-                    <img class="{{ $soldout_class }}" src="{{ asset($item['img_url']) }}" alt="商品名:{{ $item['item_name'] }}">
-                    <p>{{ $item['item_name'] }}</p>
+                    <a href="/item/{{$item['id']}}" class="item-detail__link">
+                        <img class="{{ $soldout_class }}" src="{{ asset($item['img_url']) }}" alt="商品名:{{ $item['item_name'] }}">
+                        <p>{{ $item['item_name'] }}</p>
+                    </a>
                 </li>
             @endforeach  
             </ul>

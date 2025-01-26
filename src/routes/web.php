@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ItemDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,5 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', [ItemController::class,'index']);
+Route::get('/item/{item_id}', [ItemDetailController::class,'detail']);
+
