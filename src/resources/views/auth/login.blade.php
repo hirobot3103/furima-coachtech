@@ -42,7 +42,7 @@
                     <input type="text" class="item-name" name="email" value="{{ old('email') }}">
 
                     <p class="iteme-name-title">パスワード</p>
-                    <input type="text" class="item-prace" name="password">
+                    <input type="password" class="item-prace" name="password">
                 </section>
                 <button class="item-post-btn" type="submit">ログインする</button>
             </form>
