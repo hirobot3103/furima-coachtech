@@ -215,7 +215,9 @@ body {
 }
 
 .status-mod {
-    width: 6.61vw;
+    min-width: 6.61vw;
+    max-width: 13.22vw;
+    width:100%;
     height: 1.98vw;
     line-height: 1.98vw;
     font-size: 1.32vw;

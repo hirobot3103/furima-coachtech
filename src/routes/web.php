@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ItemDetailController;
+use App\Http\Controllers\MyPageController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +20,16 @@ use App\Http\Controllers\ItemDetailController;
 
 Route::get('/', [ItemController::class,'index']);
 Route::get('/item/{item_id}', [ItemDetailController::class,'detail']);
+
+Route::middleware('auth')->group(function () {
+
+  Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage');
+  Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('store');
+  Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('index');
+
+// Route::view('/mypage/profile', 'auth.edit-prof');
+//   Route::get('/admin/search', [AuthController::class, 'search'])->name('search');
+//   Route::post('/admin/delete', [AuthController::class, 'delete'])->name('delete');
+//   Route::post('/admin/csv', [AuthController::class, 'export'])->name('export');
+});
 
