@@ -16,9 +16,18 @@
         </form>
         <nav class="page-menu">
             <ul>
-                <li><a href="">ログイン</a></li>
-                <li><a href="">マイページ</a></li>
-                <li><a class="page-menu__listing" href="">出品</a></li>
+            @if (Auth::check())
+                <li>
+                    <form action="/logout" method="post">
+                        @csrf
+                        <button type="submit">ログアウト</button>
+                    </form>
+                </li>
+                @else
+                <li><a href="/login">ログイン</a></li>
+                @endif
+                <li><a href="/mypage">マイページ</a></li>
+                <li><a class="page-menu__listing" href="/sell">出品</a></li>
             </ul>
         </nav>
     </header>
@@ -48,9 +57,13 @@
                     <div class="item-actions">
                         <figure class="favarite-action">
                             <a href="">
+                                @if ( $favorit_data['my_favorit'] > 0 )
+                                <img src="{{ asset('/assets/img/icons8-star-48.svg') }}" alt="いいねアイコン">
+                                @else
                                 <img src="{{ asset('/assets/img/star.svg') }}" alt="いいねアイコン">
+                                @endif
                             </a>
-                            <figcaption>{{ $favorit_count }}</figcaption>
+                            <figcaption>{{ $favorit_data['count'] }}</figcaption>
                         </figure>
                         <figure class="comment-action">
                             <a href="">
@@ -82,8 +95,7 @@
                         </tr>
                         <tr>
                             <td>商品の状態</td>
-                            <td><div class="status-mod">{{ $item_data->status_list->status }}</div></td>
-                            <td></td>
+                            <td colspan="2"><div class="status-mod">{{ $item_data->status_list->status }}</div></td>
                             <td></td>                            
                         </tr>
                     </table>
@@ -141,7 +153,7 @@
                         </div>
                         <div class="contributor-area">
                             <figure class="contributor-prof">
-                                <img src="./assets/img/prof.jpeg" alt="プロフィール画像" class="contributor-img">
+                                <img src="./assets/img/prof.jpeg" alt="プロフィール画像" class="contributor-img" id="">
                                 <figcaption>administrator</figcaption>
                             </figure>
                             <div class="contributor-comment">
