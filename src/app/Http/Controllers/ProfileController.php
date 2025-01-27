@@ -9,22 +9,22 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('auth.edit-prof');
+        return view( 'auth.edit-prof' );
     }
 
-    public function store(Request $request)
+    public function store( Request $request )
     {
-        $file_path = $request->file('img_url')->store('/public');
+        $filePath = $request->file( 'img_url' )->store( '/public' );
 
-        $profile_datas = new Profile();
+        $profileDatas = new Profile();
 
-        $profile_datas->user_id = $request->user_id;
-        // $profile_datas->name = $request->name;
-        $profile_datas->post_number = $request->post_number;
-        $profile_datas->address = $request->address;
-        $profile_datas->builing = $request->building;
-        $profile_datas->img_url = $file_path;
-        $profile_datas->save();
+        $profileDatas->user_id     = $request->user_id;
+        $profileDatas->post_number = $request->post_number;
+        $profileDatas->address     = $request->address;
+        $profileDatas->builing     = $request->building;
+        $profileDatas->img_url     = $filePath;
+
+        $profileDatas->save();
 
         return redirect('/');
     }

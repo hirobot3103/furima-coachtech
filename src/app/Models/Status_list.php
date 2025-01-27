@@ -11,6 +11,6 @@ class Status_list extends Model
 
     public function item()
     {
-        return $this->HasMany('App\Models\Item', 'status');
+        return $this->HasMany( 'App\Models\Item' , 'status' );
     }
 }

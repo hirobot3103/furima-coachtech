@@ -19,7 +19,7 @@ use App\Http\Controllers\ProfileController;
 */
 
 Route::get('/', [ItemController::class,'index']);
-Route::get('/item/{item_id}', [ItemDetailController::class,'detail']);
+Route::get('/item/{itemId}', [ItemDetailController::class,'detail']);
 
 Route::middleware('auth')->group(function () {
 

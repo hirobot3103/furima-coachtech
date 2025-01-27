@@ -3,20 +3,21 @@
 @section('subtitle', 'ログイン画面')
 
 @section('csslink')
-    <link rel="stylesheet" href="{{ asset('/assets/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset( '/assets/css/login.css' ) }}">
 @endsection
 
 @section('page-main')
     <header class="page-header">
         <div class="page-logo">
-            <img src=" {{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
+            <img src=" {{ asset( '/assets/img/logo.svg' ) }}" alt="ロゴ COACHTECH">
         </div>
         <form action="" class="page-search">
             <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？">
         </form>
         <nav class="page-menu">
             <ul>
-            @if (Auth::check())
+
+                @if (Auth::check())
                 <li>
                     <form action="/logout" method="post">
                         @csrf
@@ -26,6 +27,7 @@
                 @else
                 <li><a href="/login">ログイン</a></li>
                 @endif
+                
                 <li><a href="/mypage">マイページ</a></li>
                 <li><a class="page-menu__listing" href="/sell">出品</a></li>
             </ul>
@@ -39,14 +41,15 @@
                 @csrf
                 <section class="item-detail-area">
                     <p class="iteme-name-title">メールアドレス</p>
-                    <input type="text" class="item-name" name="email" value="{{ old('email') }}">
+                    <input type="text" class="item-name" name="email" value="{{ old( 'email' ) }}">
 
                     <p class="iteme-name-title">パスワード</p>
-                    <input type="text" class="item-prace" name="password">
+                    <input type="password" class="item-prace" name="password">
                 </section>
                 <button class="item-post-btn" type="submit">ログインする</button>
             </form>
             <a href="/register" class="register-link">会員登録はこちら</a>
         </div>   
     </main>
+
 @endsection
