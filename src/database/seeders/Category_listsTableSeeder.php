@@ -8,7 +8,6 @@ use Illuminate\Database\Seeder;
 
 class Category_listsTableSeeder extends Seeder
 {
-
     public function run(): void
     {
         $params = [

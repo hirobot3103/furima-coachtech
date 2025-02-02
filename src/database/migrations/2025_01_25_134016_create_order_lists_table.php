@@ -13,12 +13,10 @@ return new class extends Migration
         Schema::create('order_lists', function (Blueprint $table) {
 
             $table->id();
-            $table->text('uuid');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('item_id')->constrained('items');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
-
         });
 
     }
