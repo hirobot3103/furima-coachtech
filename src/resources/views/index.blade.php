@@ -13,8 +13,8 @@
     <main class="contents">
 
         <ul>
-            <li><span class="contents__current-page">おすすめ</span></li>
-            <li><span>マイリスト</span></li>
+            <li><a href="/"><span class="contents__current-page">おすすめ</span></a></li>
+            <li><a href="/?tag=mylist"><span>マイリスト</span></a></li>
         </ul>
         
         <hr>
@@ -42,7 +42,7 @@
                         @endphp
                         @endif
 
-                        <img class="{{ $soldout_class }}" src="{{ asset($item['img_url']) }}" alt="商品名:{{ $item['item_name'] }}">
+                        <img class="{{ $soldOutClass }}" src="{{ asset($item['img_url']) }}" alt="商品名:{{ $item['item_name'] }}">
                         <p>{{ $item['item_name'] }}</p>
 
                     </a>

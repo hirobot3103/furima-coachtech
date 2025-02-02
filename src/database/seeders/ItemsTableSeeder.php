@@ -29,12 +29,12 @@ class ItemsTableSeeder extends Seeder
         // 存在しなければ、Strageにダミー商品画像をコピー
         if ( !File::exists( Storage::url( 'Armani+Mens+Clock.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/Armani+Mens+Clock.jpg' ) , 'storage/app/public/Armani+Mens+Clock.jpg' ); 
+            copy('public/assets/img/Armani+Mens+Clock.jpg' ,'storage/app/public/Armani+Mens+Clock.jpg' );
         }
 
         if ( !File::exists( Storage::url( 'HDD+Hard+Disk.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/HDD+Hard+Disk.jpg' ) , 'storage/app/public/HDD+Hard+Disk.jpg' ); 
+            copy('public/assets/img/HDD+Hard+Disk.jpg' ,'storage/app/public/HDD+Hard+Disk.jpg' );
         }
     
         $params = [
@@ -68,12 +68,12 @@ class ItemsTableSeeder extends Seeder
  
         if ( !File::exists( Storage::url( 'iLoveIMG+d.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/iLoveIMG+d.jpg' ) , 'storage/app/public/iLoveIMG+d.jpg' ); 
+            copy('public/assets/img/iLoveIMG+d.jpg' ,'storage/app/public/iLoveIMG+d.jpg' );
         }
 
         if ( !File::exists( Storage::url( 'Leather+Shoes+Product+Photo.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/Leather+Shoes+Product+Photo.jpg' ) , 'storage/app/public/Leather+Shoes+Product+Photo.jpg' ); 
+            copy('public/assets/img/Leather+Shoes+Product+Photo.jpg' ,'storage/app/public/Leather+Shoes+Product+Photo.jpg' );
         }
 
         $params = [
@@ -107,12 +107,12 @@ class ItemsTableSeeder extends Seeder
 
         if ( !File::exists( Storage::url( 'Living+Room+Laptop.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/Living+Room+Laptop.jpg' ) , 'storage/app/public/Living+Room+Laptop.jpg' ); 
+            copy('public/assets/img/Living+Room+Laptop.jpg' ,'storage/app/public/Living+Room+Laptop.jpg' );
         }
 
         if ( !File::exists( Storage::url( 'Music+Mic+4632231.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/Music+Mic+4632231.jpg' ) , 'storage/app/public/Music+Mic+4632231.jpg' ); 
+            copy('public/assets/img/Music+Mic+4632231.jpg' ,'storage/app/public/Music+Mic+4632231.jpg' );
         }
 
         $params = [
@@ -146,12 +146,12 @@ class ItemsTableSeeder extends Seeder
 
         if ( !File::exists( Storage::url( 'Purse+fashion+pocket.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/Purse+fashion+pocket.jpg' ) , 'storage/app/public/Purse+fashion+pocket.jpg' ); 
+            copy('public/assets/img/Purse+fashion+pocket.jpg' ,'storage/app/public/Purse+fashion+pocket.jpg' );
         }
 
         if ( !File::exists( Storage::url( 'Tumbler+souvenir.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/Tumbler+souvenir.jpg' ) , 'storage/app/public/Tumbler+souvenir.jpg' ); 
+            copy('public/assets/img/Tumbler+souvenir.jpg' ,'storage/app/public/Tumbler+souvenir.jpg' );
         }
 
         $params = [
@@ -185,12 +185,12 @@ class ItemsTableSeeder extends Seeder
 
         if ( !File::exists( Storage::url( 'Waitress+with+Coffee+Grinder.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/Waitress+with+Coffee+Grinder.jpg' ) , 'storage/app/public/Waitress+with+Coffee+Grinder.jpg' ); 
+            copy('public/assets/img/Waitress+with+Coffee+Grinder.jpg' ,'storage/app/public/Waitress+with+Coffee+Grinder.jpg' );
         }
 
         if ( !File::exists( Storage::url( '外出メイクアップセット.jpg' ) )) 
         {
-            Storage::copy( asset( 'assets/img/外出メイクアップセット.jpg' ) , 'storage/app/public/外出メイクアップセット.jpg' ); 
+            copy('public/assets/img/外出メイクアップセット.jpg' ,'storage/app/public/外出メイクアップセット.jpg' );
         }
 
         $params = [

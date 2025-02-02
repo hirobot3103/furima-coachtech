@@ -11,10 +11,10 @@ return new class extends Migration
     {
 
         Schema::create('order_lists', function (Blueprint $table) {
-
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('item_id')->constrained('items');
+            $table->integer('purchase_method');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });

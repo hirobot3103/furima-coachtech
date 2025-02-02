@@ -9,7 +9,9 @@
 @section('page-main')
     <header class="page-header">
         <div class="page-logo">
-            <img src=" {{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
+            <a href="/">
+                <img src="{{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
+            </a>
         </div>
         <form action="" class="page-search">
             <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？">
@@ -37,9 +39,10 @@
             <p class="sell-title">会員登録</p>
             <form class="sell-form" action="/register" method="post">
                 @csrf
+                @foreach ($errors->all() as $error)
+                  <p>{{$error}}</p>
+                @endforeach
                 <section class="item-detail-area">
-                    <p class="iteme-name-title">ユーザー名</p>
-                    <input type="text" class="item-name" name="name" value="{{ old('name') }}">
                     <p class="iteme-name-title">メールアドレス</p>
                     <input type="text" class="item-name" name="email" value="{{ old('email') }}">
                     <p class="iteme-name-title">パスワード</p>
