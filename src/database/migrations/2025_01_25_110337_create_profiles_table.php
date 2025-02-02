@@ -11,10 +11,11 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('name',255);
             $table->string('post_number',255);
             $table->string('address',255);
-            $table->string('builing',255);
+            $table->string('building',255)->nullable();
             $table->string('img_url',255);
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();

@@ -13,11 +13,13 @@ class ItemController extends Controller
     {
 
         // プロフィールが未登録の場合に登録画面へ遷移
-        if( !empty( Auth::user() ) && empty( Profile::where('user_id', Auth::user()->id)->first() )) {
-            return redirect('/mypage/profile');
+        if( !empty( Auth::user() ) && empty( Profile::where( 'user_id' , Auth::user()->id )->first() ) )
+        {
+            return redirect( '/mypage/profile' );
         }
 
-        $item_data = Item::All();
-        return view('index', compact('item_data'));
+        $itemData = Item::All();
+        
+        return view( 'index' , compact( 'itemData' ) );
     }
 }

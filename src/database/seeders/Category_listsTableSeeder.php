@@ -8,7 +8,6 @@ use Illuminate\Database\Seeder;
 
 class Category_listsTableSeeder extends Seeder
 {
-
     public function run(): void
     {
         $params = [
@@ -28,6 +27,6 @@ class Category_listsTableSeeder extends Seeder
             [ 'category_name' => 'ベビー・キッズ' ],
         ];
 
-        DB::table('category_lists')->insert($params);        
+        DB::table( 'category_lists' )->insert( $params );        
     }
 }

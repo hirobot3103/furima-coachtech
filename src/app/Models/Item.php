@@ -21,11 +21,11 @@ class Item extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo( 'App\Models\User' );
     }
 
     public function status_list()
     {       
-        return $this->belongsTo('App\Models\Status_list', 'status');
+        return $this->belongsTo( 'App\Models\Status_list' , 'status' );
     }
 }
