@@ -190,7 +190,6 @@ body {
 }
 
 .item-status__table {
-    width: 39.68vw;
     margin: 3vw 0 0 0;
 }
 
@@ -203,11 +202,20 @@ body {
     font-weight: bold;
 }
 
+.category_title {
+    width: calc( 39.68vw * 0.3);
+}
+.category_area {
+    width: calc( 39.68vw * 0.7);
+    display: inline-flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
 .category-mod {
     width: 6.61vw;
     height: 1.98vw;
     line-height: 1.98vw;
-    font-size: 1.32vw;
+    font-size: 1vw;
     font-weight: normal;
     text-align: center;
     background-color: #d9d9d9;

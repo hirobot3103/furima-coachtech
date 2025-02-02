@@ -13,8 +13,8 @@
     <main class="contents">
 
         <ul>
-            <li><span class="contents__current-page">おすすめ</span></li>
-            <li><span>マイリスト</span></li>
+            <li><a href="/"><span class="contents__current-page">おすすめ</span></a></li>
+            <li><a href="/?tag=mylist"><span>マイリスト</span></a></li>
         </ul>
         
         <hr>
