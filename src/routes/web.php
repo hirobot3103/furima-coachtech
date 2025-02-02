@@ -23,6 +23,8 @@ Route::get('/item/{itemId}', [ItemDetailController::class,'detail']);
 
 Route::middleware('auth')->group(function () {
 
+  Route::post('/item/{itemId}', [ItemDetailController::class,'setFavoritCount']);
+  
   Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage');
   Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('store');
   Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('index');

@@ -17,6 +17,7 @@ class ItemDetailController extends Controller
         $itemDatas = Item::with( 'status_list' )->get();
         $itemData = $itemDatas[ $itemId - 1 ];
 
+
         // いいねの総数と、ログインユーザーがいいねをした商品かを取得
         $favoritCount = 0;
         $myFavoritCount = 0;
@@ -30,7 +31,7 @@ class ItemDetailController extends Controller
 
         if ( !empty( Auth::user() ) )
         {
-            $myFavoritItem = Favorit::where( 'user_id', Auth::user()->id )->first();
+            $myFavoritItem = $favoritDatas->where( 'user_id', Auth::user()->id )->first();
 
             if ( !empty( $myFavoritItem ) && ( $itemId == $myFavoritItem['item_id'] ) )
             {
@@ -46,5 +47,28 @@ class ItemDetailController extends Controller
         // コメント関係を取得
 
         return view( 'detail' , compact( 'itemData' , 'favoritData' ) );
+    }
+
+    public function setFavoritCount(Request $request, int $ItemId)
+    {
+        if( $request->has('myfavorit') ) {
+            
+            if( $request->myfavoritFlg > 0 ) {
+                
+                // いいねを解除
+                Favorit::where( 'item_id',  $ItemId )->where( 'user_id', Auth::user()->id )->delete();
+
+            } else {
+            
+                // いいねを追加
+                $favoritTable = new Favorit;
+                $favoritTable->user_id = Auth::user()->id;
+                $favoritTable->item_id = $ItemId; 
+                $favoritTable->save();
+
+            }
+
+            return redirect('/item/' . $ItemId );
+        }
     }
 }

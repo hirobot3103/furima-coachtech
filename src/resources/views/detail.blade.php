@@ -31,17 +31,21 @@
             <section class="item-detail-area">
                 <div class="detail-item-title">
                     <p class="item-name">{{ $itemData[ 'item_name' ] }}</p>
-                    <p class="brand-name">ブランド名</p>
+                    <p class="brand-name">{{ $itemData[ 'brand_name' ] }}</p>
                     <p class="price">&yen;<span>{{ number_format( $itemData[ 'price' ] ) }}</span>(税込)</p>
                     <div class="item-actions">
                         <figure class="favarite-action">
-                            <a href="">
+                            <form action="/item/{{ $itemData[ 'id' ] }}" method="post">
+                                @csrf
+                                <input type="hidden" name="myfavoritFlg" value={{ $favoritData[ 'myfavorit' ] }}>
+                                <button type="submit" name="myfavorit" value="1">
                                 @if ( $favoritData[ 'myfavorit' ] > 0 )
-                                <img src="{{ asset( '/assets/img/icons8-star-48.svg') }}" alt="いいねアイコン">
+                                    <img src="{{ asset( '/assets/img/icons8-star-48.svg') }}" alt="いいねアイコン">
                                 @else
-                                <img src="{{ asset( '/assets/img/star.svg' ) }}" alt="いいねアイコン">
+                                    <img src="{{ asset( '/assets/img/star.svg' ) }}" alt="いいねアイコン">
                                 @endif
-                            </a>
+                                </button>
+                            </form>
                             <figcaption>{{ $favoritData[ 'count' ] }}</figcaption>
                         </figure>
                         <figure class="comment-action">
