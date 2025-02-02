@@ -29,4 +29,11 @@ class Item extends Model
     {       
         return $this->belongsTo( 'App\Models\Status_list' , 'status' );
     }
+
+    public function scopeKeySearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('item_name', 'like', '%' . $keyword . '%');
+        }
+    }
 }

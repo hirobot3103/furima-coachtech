@@ -19,21 +19,46 @@ class ItemController extends Controller
             return redirect( '/mypage/profile' );
         }
 
+
         // mylist選択時
-        if ( !empty( Auth::user() ) && $request->has('tag') )
+        if ( $request->has('tag') && $request->tag == 'mylist' )
         {
+
+            if ( empty( Auth::user() )) 
+            {
+                return redirect('/login');
+            }
+
             $favoritItems = Favorit::where('user_id', Auth::user()->id )->get();
             $whereIn[] = 0;
             foreach($favoritItems as $item )
             {
                 $whereIn[] = $item['item_id'];
             }
-            $itemData = Item::whereIn('id', $whereIn)->get();
+            if ($request->has('keyword')){
+                $itemData = Item::whereIn('id', $whereIn)->KeySearch($request->keyword)->get();
+            } else {
+                $itemData = Item::whereIn('id', $whereIn)->get();            
+            }
 
             return view( 'mylist' , compact( 'itemData' ) );
         }
 
-        $itemData = Item::All();
+
+        if ( empty( Auth::user() ) ){
+            if ($request->has('keyword')){
+                $itemData = Item::KeySearch($request->keyword)->get();
+            } else {
+                $itemData = Item::all();
+            }
+            return view( 'index' , compact( 'itemData' ) );
+        }
+
+        if ($request->has('keyword')){
+            $itemData = Item::where('user_id', '!=', Auth::user()->id)->KeySearch($request->keyword)->get();
+        } else {
+            $itemData = Item::where('user_id', '!=', Auth::user()->id)->get();
+        }
         
         return view( 'index' , compact( 'itemData' ) );
     }
