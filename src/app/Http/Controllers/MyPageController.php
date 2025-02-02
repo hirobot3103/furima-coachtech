@@ -10,8 +10,6 @@ class MyPageController extends Controller
 {
     public function index()
     {
-    
-
-        return view('auth.prof');
+        return view( 'auth.prof' );
     }
 }

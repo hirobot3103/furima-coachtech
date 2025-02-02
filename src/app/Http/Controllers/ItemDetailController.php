@@ -9,33 +9,42 @@ use App\Models\Favorit;
 
 class ItemDetailController extends Controller
 {
-    public function detail( int $item_id )
+
+    public function detail( int $itemId )
     {
         
         // 商品詳細情報を取得
-        $item_datas = Item::with('status_list')->get();
-        $item_data = $item_datas[ $item_id - 1 ];
+        $itemDatas = Item::with( 'status_list' )->get();
+        $itemData = $itemDatas[ $itemId - 1 ];
 
         // いいねの総数と、ログインユーザーがいいねをした商品かを取得
-        $favorit_count = 0;
-        $my_favorit_count = 0;
-        $favorit_datas = Favorit::where('item_id', $item_id);
-        if ( !empty($favorit_datas) ) {
-            $favorit_count = $favorit_datas->count();
+        $favoritCount = 0;
+        $myFavoritCount = 0;
+
+        $favoritDatas = Favorit::where( 'item_id', $itemId );
+
+        if ( !empty( $favoritDatas ) )
+        {
+            $favoritCount = $favoritDatas->count();
         }
-        if ( !empty( Auth::user() ) ) {
-            $my_favorit_item = Favorit::where('user_id', Auth::user()->id )->first();
-            if ( !empty($my_favorit_item) && ($item_id == $my_favorit_item['item_id']) ){
-                $my_favorit_count = 1;
+
+        if ( !empty( Auth::user() ) )
+        {
+            $myFavoritItem = Favorit::where( 'user_id', Auth::user()->id )->first();
+
+            if ( !empty( $myFavoritItem ) && ( $itemId == $myFavoritItem['item_id'] ) )
+            {
+                $myFavoritCount = 1;
             }
-        } 
-        $favorit_data = [
-          'count' => $favorit_count,
-          'my_favorit' => $my_favorit_count,  
+        }
+
+        $favoritData = [
+          'count' => $favoritCount,
+          'myfavorit' => $myFavoritCount,  
         ];
         
         // コメント関係を取得
 
-        return view('detail', compact('item_data', 'favorit_data') );
+        return view( 'detail' , compact( 'itemData' , 'favoritData' ) );
     }
 }
