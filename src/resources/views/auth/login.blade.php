@@ -9,7 +9,9 @@
 @section('page-main')
     <header class="page-header">
         <div class="page-logo">
-            <img src=" {{ asset( '/assets/img/logo.svg' ) }}" alt="ロゴ COACHTECH">
+            <a href="/">
+                <img src="{{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
+            </a>
         </div>
         <form action="" class="page-search">
             <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？">

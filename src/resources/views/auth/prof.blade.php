@@ -10,7 +10,9 @@
 <body>
     <header class="page-header">
         <div class="page-logo">
-            <img src="{{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
+            <a href="/">
+                <img src="{{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
+            </a>
         </div>
         <form action="" class="page-search">
             <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？">
@@ -34,67 +36,44 @@
     </header>
     <main class="contents">
         <div class="prof-area">
-            <img class="prof-img" src="./assets/img/prof.jpeg" alt="">
-            <p class="user-mane">ユーザー名</p>
+            <img class="prof-img" src="{{ $profileData['img_url'] }}" alt="プロフィール画像">
+            <p class="user-mane">{{ $profileData['name'] }}</p>
             <a href="/mypage/profile" class="prof-link">プロフィールを編集</a>
         </div>
         <ul>
-            <li><span>出品した商品</span></li>
-            <li><span class="contents__current-page">購入した商品</span></li>
+            <li><a href="/mypage?tag=sell"><span>出品した商品</span></a></li>
+            <li><a href="/mypage?tag=buy"><span class="contents__current-page" >購入した商品</span></a></li>
         </ul>
         <hr>
         <section class="contents__lists-area">
-            <ul class="contents__lists">
+        <ul class="contents__lists">
+            @foreach ($itemData as $item)
+
+            @php
+                $soldOutClass = "";
+            @endphp  
+
                 <li class="contents__item">
-                    <img src="./assets/img/test.jpg" alt="商品名">
-                    <p>商品名</p>
+
+                    <a href="/item/{{$item['id']}}" class="item-detail__link">
+                        
+                        @if ( $item['soldout'] == 1)
+                        <div class="item-sold-out__discript">
+                            <span>SOLD OUT</span>
+                        </div>
+                        
+                        @php
+                            $soldOutClass = "item-sold-out__img";
+                        @endphp
+                        @endif
+
+                        <img class="{{ $soldOutClass }}" src="{{ asset($item['img_url']) }}" alt="商品名:{{ $item['item_name'] }}">
+                        <p>{{ $item['item_name'] }}</p>
+
+                    </a>
+
                 </li>
-                <li class="contents__item">
-                    <img src="./assets/img/Armani+Mens+Clock.jpg" alt="商品名">
-                    <p>商品名</p>
-                </li>
-                <li class="contents__item">
-                    <div class="item-sold-out__discript">
-                        <span>SOLD OUT</span>
-                    </div>
-                    <img class="item-sold-out__img" src="./assets/img/HDD+Hard+Disk.jpg" alt="商品名">
-                    <p>商品名</p>
-                </li>
-                <li class="contents__item">
-                    <img src="./assets/img/iLoveIMG+d.jpg" alt="商品名">
-                    <p>商品名</p>
-                </li>
-                <li class="contents__item">
-                    <img src="./assets/img/Leather+Shoes+Product+Photo.jpg" alt="商品名">
-                    <p>商品名</p>
-                </li>
-                <li class="contents__item">
-                    <div class="item-sold-out__discript">
-                        <span>SOLD OUT</span>
-                    </div>
-                    <img class="item-sold-out__img" src="./assets/img/Living+Room+Laptop.jpg " alt="商品名">
-                    <p>商品名</p>
-                </li>
-                <li class="contents__item">
-                    <img src="./assets/img/Music+Mic+4632231.jpg" alt="商品名">
-                    <p>商品名</p>
-                </li>
-                <li class="contents__item">
-                    <img src="./assets/img/Purse+fashion+pocket.jpg" alt="商品名">
-                    <p>商品名</p>
-                </li>
-                <li class="contents__item">
-                    <img src="./assets/img/Tumbler+souvenir.jpg" alt="商品名">
-                    <p>商品名</p>
-                </li>
-                <li class="contents__item">
-                    <img src="./assets/img/Waitress+with+Coffee+Grinder.jpg" alt="商品名">
-                    <p>商品名</p>
-                </li>
-                <li class="contents__item">
-                    <img src="./assets/img/外出メイクアップセット.jpg" alt="商品名">
-                    <p>商品名</p>
-                </li>
+                @endforeach  
             </ul>
         </section>
     </main>

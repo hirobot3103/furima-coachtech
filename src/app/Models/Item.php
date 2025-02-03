@@ -12,6 +12,7 @@ class Item extends Model
     protected $fillable = [
         'user_id',
         'item_name',
+        'brand_name',
         'price',
         'discription',
         'soldout',
@@ -27,5 +28,12 @@ class Item extends Model
     public function status_list()
     {       
         return $this->belongsTo( 'App\Models\Status_list' , 'status' );
+    }
+
+    public function scopeKeySearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('item_name', 'like', '%' . $keyword . '%');
+        }
     }
 }

@@ -14,14 +14,17 @@ class Order_ListTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'item_id' => 3,
+                'purchase_method' => 1,
             ],
             [
                 'user_id' => 2,
                 'item_id' => 7,
+                'purchase_method' => 2,
             ],
             [
                 'user_id' => 2,
                 'item_id' => 10,
+                'purchase_method' => 2,
             ],
         ];
 
