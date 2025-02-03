@@ -59,6 +59,11 @@ body {
     line-height: 5.31vw;
 }
 
+
+.page-menu-btn {
+    cursor: pointer;
+}
+
 .page-menu > ul {
     display: flex;
     justify-content: space-around;

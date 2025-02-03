@@ -22,7 +22,7 @@
 
                             @if ( $itemData['soldout'] == 1)
                             <div class="item-sold-out__discript">
-                                <span>SOLD OUT</span>
+                                <span>SOLD</span>
                             </div>
                     
                             @php
@@ -77,7 +77,7 @@
                         </tr>
                         <tr>
                             <td class="purchase-title">支払い方法</td>
-                            <td class="purchase-method" id="purchase-method">未　定</td>
+                            <td class="purchase-method" ><div id="purchase-method-text" >未　定</div></td>
                         </tr>
                     </table>
                     <form class="purchase-form" action="/purchase/{{ $itemData[ 'id' ] }}" method="post">
@@ -93,7 +93,12 @@
         var select = document.getElementById('method_select');
 
         select.onchange = function(){
-            document.getElementById('purchase_method').value = select.value;
+            document.getElementById('purchase_method').value = select.value
+            if(document.getElementById('purchase_method').value == "1") {
+                document.getElementById('purchase-method-text').textContent = "コンビニ払い";
+            } else {
+                document.getElementById('purchase-method-text').textContent = "カード払い";
+            };
         }
     </script>
 @endsection
