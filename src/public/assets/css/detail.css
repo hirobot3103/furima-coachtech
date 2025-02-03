@@ -194,7 +194,7 @@ body {
 }
 
 .item-status__table  tr {
-    height: 4vw;
+    /* height: 4vw; */
 }
 
 .item-status__table  td {
@@ -207,13 +207,16 @@ body {
 }
 .category_area {
     width: calc( 39.68vw * 0.7);
-    display: inline-flex;
-    flex-direction: row;
-    justify-content:space-between;
+    height: 100%;
+    display: flex;
+    /* justify-content:space-between; */
+    flex-wrap: wrap;
+    row-gap: 1vw;
 }
 .category-mod {
-    width: 6.61vw;
+    min-width: 6.61vw;
     height: 1.98vw;
+    margin-right:1vw;    
     line-height: 1.98vw;
     font-size: 1vw;
     font-weight: normal;

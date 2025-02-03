@@ -43,7 +43,7 @@
                     <p class="method__index">支払い方法</p>
                     <form class="method__form" action="">
                         <div class="select-triangle">&#x25BD;</div>
-                        <select name="" id="" class="select-method">
+                        <select name="" id="method_select" class="select-method">
                             <option value="0" selected disabled>選択してください</option>
                             <option value="1" class="method-conbini">コンビニ払い</option>
                             <option value="2" class="method-card">カード払い</option>
@@ -77,15 +77,23 @@
                         </tr>
                         <tr>
                             <td class="purchase-title">支払い方法</td>
-                            <td class="purchase-method">コンビニ払い</td>
+                            <td class="purchase-method" id="purchase-method">未　定</td>
                         </tr>
                     </table>
-                    <form class="purchase-form" action="" method="post">
+                    <form class="purchase-form" action="/purchase/{{ $itemData[ 'id' ] }}" method="post">
                         @csrf
+                        <input type="hidden" name="purchase_method" id="purchase_method">
                         <button type="submit">購入する</button>
                     </form>
                 </section>
             </section>
         </div>   
     </main>
+    <script>
+        var select = document.getElementById('method_select');
+
+        select.onchange = function(){
+            document.getElementById('purchase_method').value = select.value;
+        }
+    </script>
 @endsection
