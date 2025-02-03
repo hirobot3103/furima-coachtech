@@ -19,7 +19,7 @@
 
                 @if ( $itemData['soldout'] == 1)
                     <div class="item-sold-out__discript">
-                        <span>SOLD OUT</span>
+                        <span>SOLD</span>
                     </div>
                     
                     @php
@@ -56,7 +56,7 @@
                 </div>
                 <div class="purchase-btn">
                     @if ( $itemData['soldout'] == 1)
-                    <a class="purchase-anchor" href="">SOLD OUT</a>
+                    <a class="purchase-anchor" href="">SOLD</a>
                     @else
                     <a class="purchase-anchor" href="/purchase/{{ $itemData[ 'id' ] }}">購入手続きへ</a>
                     @endif

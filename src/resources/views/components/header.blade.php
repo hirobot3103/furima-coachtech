@@ -13,7 +13,7 @@
                 <li>
                     <form action="/logout" method="post">
                         @csrf
-                        <button type="submit">ログアウト</button>
+                        <button type="submit" class="page-menu-btn">ログアウト</button>
                     </form>
                 </li>
                 @else

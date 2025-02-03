@@ -33,6 +33,10 @@ body {
     height:100%;
 }
 
+.page_logo > a {
+    display: contents;
+}
+
 .page-logo > img {
     width: 24.4vw;
     height: 2.3vw;
@@ -61,6 +65,10 @@ body {
     width: 30.7vw;
     height:100%;
     line-height: 5.31vw;
+}
+
+.page-menu-btn {
+    cursor: pointer;
 }
 
 .page-menu > ul {
