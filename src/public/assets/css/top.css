@@ -68,6 +68,10 @@ body {
     justify-content: space-around;
 }
 
+.page-menu-btn {
+    cursor: pointer;
+}
+
 .page-menu__listing {
     display: inline-block;
     margin: calc( (5.31vw - 3.3vw ) / 2 ) 0;

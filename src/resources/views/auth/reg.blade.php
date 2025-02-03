@@ -46,9 +46,9 @@
                     <p class="iteme-name-title">メールアドレス</p>
                     <input type="text" class="item-name" name="email" value="{{ old('email') }}">
                     <p class="iteme-name-title">パスワード</p>
-                    <input type="text" class="item-name" name="password">
+                    <input type="password" class="item-name" name="password">
                     <p class="iteme-name-title">確認用パスワード</p>
-                    <input type="text" class="item-prace" name="password_confirmation">
+                    <input type="password" class="item-prace" name="password_confirmation">
                 </section>
                 <button class="item-post-btn" type="submit">登録する</button>
             </form>
