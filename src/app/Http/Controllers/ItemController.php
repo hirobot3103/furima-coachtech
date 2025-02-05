@@ -24,9 +24,11 @@ class ItemController extends Controller
         if ( $request->has('tag') && $request->tag == 'mylist' )
         {
 
+            // 未認証の場合は何も表示しない
             if ( empty( Auth::user() )) 
             {
-                return redirect('/login');
+                $itemData = [];
+                return view( 'mylist' , ['itemData' => $itemData]);
             }
 
             $favoritItems = Favorit::where('user_id', Auth::user()->id )->get();
@@ -45,6 +47,7 @@ class ItemController extends Controller
         }
 
 
+        // 商品一覧表示
         if ( empty( Auth::user() ) ){
             if ($request->has('keyword')){
                 $itemData = Item::KeySearch($request->keyword)->get();

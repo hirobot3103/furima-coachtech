@@ -22,7 +22,7 @@
 
                             @if ( $itemData['soldout'] == 1)
                             <div class="item-sold-out__discript">
-                                <span>SOLD</span>
+                                <span>Sold</span>
                             </div>
                     
                             @php
@@ -83,6 +83,10 @@
                     <form class="purchase-form" action="/purchase/{{ $itemData[ 'id' ] }}" method="post">
                         @csrf
                         <input type="hidden" name="purchase_method" id="purchase_method">
+                        <input type="hidden" name="price" id="price" value="{{ $itemData[ 'price' ] }}">
+                        <input type="hidden" name="post_number" id="post_number" value="{{ $postCodeLeft }}-{{ $postCodeRight }}">
+                        <input type="hidden" name="address" id="address" value="{{ $profileData['address'] }}">
+                        <input type="hidden" name="building" id="building" value="{{ $profileData['building'] }}">
                         <button type="submit">購入する</button>
                     </form>
                 </section>

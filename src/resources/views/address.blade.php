@@ -67,6 +67,7 @@
                     <p class="iteme-name-title">建物名</p>
                     <input type="text" class="item-prace" name="building" value="{{ $building }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="name" value="{{ $name }}">
                 </section>
                 <button class="item-post-btn" type="submit">更新する</button>
             </form>
