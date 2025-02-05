@@ -44,9 +44,15 @@
                 <section class="item-detail-area">
                     <p class="iteme-name-title">メールアドレス</p>
                     <input type="text" class="item-name" name="email" value="{{ old( 'email' ) }}">
+                    @error('email')
+                    <div>{{ $message }}</div>
+                    @enderror
 
                     <p class="iteme-name-title">パスワード</p>
                     <input type="password" class="item-prace" name="password">
+                    @error('password')
+                    <div>{{ $message }}</div>
+                    @enderror
                 </section>
                 <button class="item-post-btn" type="submit">ログインする</button>
             </form>
