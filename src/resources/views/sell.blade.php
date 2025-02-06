@@ -13,7 +13,10 @@
     <main class="contents">
         <div class="contents-area">
             <p class="sell-title">商品の出品</p>
-            <form class="sell-form" action="" method="post" enctype="multipart/form-data">
+            @foreach ($errors->all() as $error)
+            <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
+            @endforeach
+            <form class="sell-form" action="/sell" method="post" enctype="multipart/form-data">
                 @csrf
                 <section class="uploader-area">
                     <p>商品画像</p>
@@ -44,18 +47,17 @@
                     <p class="item-title">商品名と説明</p>
                     <hr>
                     <p class="iteme-name-title">商品名</p>
-                    <input type="text" class="item-name" name="item_name">
+                    <input type="text" class="item-name" name="item_name" value="{{ old('item_name') }}">
 
                     <p class="iteme-name-title">ブランド名</p>
-                    <input type="text" class="item-name" name="brand_name">
+                    <input type="text" class="item-name" name="brand_name" {{ old('brand_name') }}>
 
                     <p class="iteme-name-title">商品の説明</p>
-                    <textarea name="discription" id="item-discript" class="item-discript">
-
+                    <textarea name="discription" id="item-discript" class="item-discript" {{ old('discription') }}>
                     </textarea>
 
                     <p class="iteme-name-title">販売価格</p>
-                    <input type="text" class="item-prace" name="price" placeholder="&yen;">
+                    <input type="text" class="item-prace" name="price" placeholder="&yen;" value="{{ old('price') }}"">
                 </section>
                 <button class="item-post-btn" type="submit">出品する</button>
             </form>

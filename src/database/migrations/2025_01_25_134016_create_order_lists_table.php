@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('item_id')->constrained('items');
             $table->integer('purchase_method');
-            $table->string('price',255);
+            $table->integer('price');
             $table->string('post_number',255);
             $table->string('address',255);
             $table->string('building',255)->nullable();

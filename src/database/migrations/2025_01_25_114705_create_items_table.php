@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('item_name',255);
             $table->string('brand_name',255)->nullable();
-            $table->string('price',255);
+            $table->integer('price');
             $table->string('discription',255);
             $table->integer('soldout');
             $table->foreignId('status')->constrained('status_lists');

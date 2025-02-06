@@ -57,11 +57,7 @@
                         <a href="/purchase/address/{{ $itemData[ 'id' ] }}">変更する</a>
                     </div>
                     <div class="address-info">
-                        @php
-                            $postCodeLeft = substr($profileData['post_number'], 0, 3);
-                            $postCodeRight = substr($profileData['post_number'], 3, 4);
-                        @endphp
-                        <p>〒{{ $postCodeLeft }}-{{ $postCodeRight }}</p>
+                        <p>〒{{ $profileData['post_number'] }}</p>
                         <p>{{ $profileData['address'] . $profileData['building'] }}</p>
                     </div>
                 </section>
@@ -80,11 +76,14 @@
                             <td class="purchase-method" ><div id="purchase-method-text" >未　定</div></td>
                         </tr>
                     </table>
+                    @foreach ($errors->all() as $error)
+                    <li class="validatin-error__area">{{$error}}</li>
+                @endforeach
                     <form class="purchase-form" action="/purchase/{{ $itemData[ 'id' ] }}" method="post">
                         @csrf
                         <input type="hidden" name="purchase_method" id="purchase_method">
                         <input type="hidden" name="price" id="price" value="{{ $itemData[ 'price' ] }}">
-                        <input type="hidden" name="post_number" id="post_number" value="{{ $postCodeLeft }}-{{ $postCodeRight }}">
+                        <input type="hidden" name="post_number" id="post_number" value="{{ $profileData['post_number'] }}">
                         <input type="hidden" name="address" id="address" value="{{ $profileData['address'] }}">
                         <input type="hidden" name="building" id="building" value="{{ $profileData['building'] }}">
                         <button type="submit">購入する</button>

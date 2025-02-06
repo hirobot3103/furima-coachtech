@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Profile;
 use App\Models\Order_list;
 
+use App\Http\Requests\PurchaseRequest;
+
 class PurchaseController extends Controller
 {
+    
     public function index(int $itemId)
     {
         $itemData = Item::where('id', $itemId)->first();
@@ -18,10 +20,10 @@ class PurchaseController extends Controller
         return view( 'purchase', compact('itemData', 'profileData'));
     }
 
-    public function buy(Request $request, int $itemId)
+    public function buy( PurchaseRequest $request , int $itemId)
     {
         $itemParam = ['soldout' => 1];
-        Item::where('id', $itemId)->update($itemParam);
+        Item::where( 'id', $itemId )->update( $itemParam );
         
         $param = [
           'user_id'         => Auth::user()->id,
@@ -34,6 +36,7 @@ class PurchaseController extends Controller
         ];
         Order_list::insert($param);
 
+        // 決済ページへ
         // $url = "https://www.strip.com";
         // return redirect()->away($url);
         return redirect('/mypage?tag=buy');

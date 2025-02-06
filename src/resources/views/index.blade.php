@@ -30,8 +30,12 @@
 
                 <li class="contents__item">
 
+                    {{-- @if( !empty($keySentence) )
+                    <a href="/item/{{$item['id']}}?keyword={{ $keySentence }}" class="item-detail__link">
+                    @else --}}
                     <a href="/item/{{$item['id']}}" class="item-detail__link">
-                        
+                    {{-- @endif 
+                         --}}
                         @if ( $item['soldout'] == 1)
                         <div class="item-sold-out__discript">
                             <span>Sold</span>

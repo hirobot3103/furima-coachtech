@@ -14,22 +14,24 @@ class RegisterRequest extends FormRequest
 
     public function rules(): array
     {
-            return [
-                
-                'email' => 'required | email | max:255 | unique:users',
-                'password' => 'required | string | min:8 | confirmed',
-            ];
+        return [
+            'email'                 => 'required | email | max:255 | unique:users',
+            'password'              => 'required | string | min:8 | confirmed',
+            'password_confirmation' => 'required | string | min:8',
+
+        ];
     }
 
     public function messages(): array
     {
-        $commonErrorMessage = 'ログイン情報が登録されていません。aa';
-
         return [
-            'email.required'    => 'メールアドレスを入力してください11',
-            'email.email'       => $commonErrorMessage,
-            'password.required' => 'パスワードを入力してください11',
-            'password.min'      => $commonErrorMessage,
+            'email.required'                 => 'メールアドレスを入力してください',
+            'email.email'                    => 'メール形式で入力してください',
+            'password.required'              => 'パスワードを入力してください',
+            'password.min'                   => 'パスワードは8文字以上で入力してください',
+            'password.confirmed'             => 'パスワードと一致しません',
+            'password_confirmation.required' => '確認用パスワードを入力してください',
+            'password_confirmation.min'      => '確認用パスワードは8文字以上で入力してください',
         ];
     }
 }

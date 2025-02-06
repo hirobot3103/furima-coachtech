@@ -27,8 +27,8 @@ Route::middleware('auth')->group(function () {
   Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('updata');
   Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('prof');
 
-  Route::get('/sell', [SellController::class, 'index'] );
-  Route::post('/sell', [SellController::class, 'store'] );
+  Route::get('/sell', [SellController::class, 'index'] )->name('sellindex');
+  Route::post('/sell', [SellController::class, 'store'] )->name('sellstore');
 
 });
 

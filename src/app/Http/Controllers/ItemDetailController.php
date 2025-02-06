@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Favorit;
 use App\Models\Comment;
 use App\Models\Profile;
+use App\Http\Requests\CommentRequest;
 
 class ItemDetailController extends Controller
 {
@@ -59,7 +59,7 @@ class ItemDetailController extends Controller
         return view( 'detail' , compact( 'itemData' , 'itemCategories', 'favoritData', 'commentDatas', 'commentCount', 'profileDatas' ) );
     }
 
-    public function setFavoritOrComment(Request $request, int $ItemId)
+    public function setFavoritOrComment( CommentRequest $request, int $ItemId)
     {
         if( $request->has('myfavorit') ) {
             
@@ -83,7 +83,6 @@ class ItemDetailController extends Controller
 
         if ( $request->has('commentReg') )
         {
-            
             $commentTable = new Comment;
             $commentTable->user_id = Auth::user()->id;
             $commentTable->item_id = $ItemId;

@@ -37,21 +37,18 @@
     <main class="contents">
         <div class="contents-area">
             <p class="sell-title">会員登録</p>
+            @foreach ($errors->all() as $error)
+            <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
+            @endforeach
             <form class="sell-form" action="/register" method="post">
                 @csrf
                 <section class="item-detail-area">
                     <p class="iteme-name-title">メールアドレス</p>
                     <input type="text" class="item-name" name="email" value="{{ old('email') }}">
-                    @error('email')
-                    <div>{{ $message }}</div>
-                    @enderror
                     <p class="iteme-name-title">パスワード</p>
                     <input type="password" class="item-name" name="password">
                     <p class="iteme-name-title">確認用パスワード</p>
                     <input type="password" class="item-prace" name="password_confirmation">
-                    @error('password')
-                    <div>{{ $message }}</div>
-                    @enderror
                 </section>
                 <button class="item-post-btn" type="submit">登録する</button>
             </form>
