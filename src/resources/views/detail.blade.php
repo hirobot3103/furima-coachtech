@@ -56,7 +56,7 @@
                 </div>
                 <div class="purchase-btn">
                     @if ( $itemData['soldout'] == 1)
-                    <a class="purchase-anchor" href="">SOLD</a>
+                    <a class="purchase-anchor" href=""><S>Sold</S></a>
                     @else
                     <a class="purchase-anchor" href="/purchase/{{ $itemData[ 'id' ] }}">購入手続きへ</a>
                     @endif
@@ -116,8 +116,12 @@
                         </div>
                         @endforeach
                     </section>
+                    @if ( Auth::check() )
                     <section class="comment-post-area">
                         <p class="comment-post__index">商品へのコメント</p>
+                        @foreach ($errors->all() as $error)
+                        <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
+                        @endforeach
                         <form class="comment-post__form" action="/item/{{ $itemData[ 'id' ] }}" method="post">
                             @csrf
                             <textarea name="comment" id="" class="comment__input">
@@ -125,6 +129,7 @@
                             <button name="commentReg" class="post-btn" type="submit" value=1 >コメントを送信する</button>
                         </form>
                     </section>
+                    @endif
                 </section>
 
             </section>

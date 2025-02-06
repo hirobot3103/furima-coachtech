@@ -34,7 +34,16 @@
 =======
 ./binlog.000027
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 5356df2477827a7fac8f835638174842f8eed0c5
 =======
 ./binlog.000028
 >>>>>>> b104fbe751b59e6306475b558ba2ba93e3585269
+=======
+./binlog.000028
+./binlog.000029
+./binlog.000030
+./binlog.000031
+./binlog.000032
+./binlog.000033
+>>>>>>> db7eefb0901e2a6b8f1295c49da99ea8e42c7aa3

@@ -39,10 +39,14 @@
     <main class="contents">
         <div class="contents-area">
             <p class="sell-title">プロフィール設定</p>
+            @foreach ($errors->all() as $error)
+            <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
+            @endforeach
             <form class="sell-form" action="/mypage/profile" method="post" enctype="multipart/form-data">
                 @csrf
+                @if( !empty($profileData) )
                 @method('PATCH')
-
+                @endif
                 @php
                     if( !empty($profileData) ) {
                         $name = $profileData['name'];

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category_list;
 use App\Models\Status_list;
 use App\Models\Item;
 use App\Models\Category;
-
+use App\Http\Requests\ExhibitionRequest;
+// use Illuminate\Http\Request;
 
 class SellController extends Controller
 {
@@ -20,7 +20,7 @@ class SellController extends Controller
         return view('sell', compact('categoryLists', 'statusLists'));
     }
 
-    public function store(Request $request)
+    public function store(ExhibitionRequest $request)
     {
         if( !empty($request->img_url) ) {
             $filePath = $request->file( 'img_url' )->store( '/public' );

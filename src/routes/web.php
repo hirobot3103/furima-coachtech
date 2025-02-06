@@ -9,6 +9,7 @@ use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellController;
 
+<<<<<<< HEAD
 // use App\Http\Controllers\Auth\LoginController;
 // use Laravel\Fortify\Fortify;
 
@@ -16,6 +17,8 @@ use App\Http\Controllers\SellController;
 
 // Route::post('/login', [LoginController::class, 'store']);
 
+=======
+>>>>>>> db7eefb0901e2a6b8f1295c49da99ea8e42c7aa3
 Route::get('/', [ItemController::class,'index']);
 Route::get('/item/{itemId}', [ItemDetailController::class,'detail']);
 
@@ -34,8 +37,8 @@ Route::middleware('auth')->group(function () {
   Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('updata');
   Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('prof');
 
-  Route::get('/sell', [SellController::class, 'index'] );
-  Route::post('/sell', [SellController::class, 'store'] );
+  Route::get('/sell', [SellController::class, 'index'] )->name('sellindex');
+  Route::post('/sell', [SellController::class, 'store'] )->name('sellstore');
 
 });
 

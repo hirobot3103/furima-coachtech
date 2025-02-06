@@ -37,6 +37,9 @@
     <main class="contents">
         <div class="contents-area">
             <p class="sell-title">会員登録</p>
+            @foreach ($errors->all() as $error)
+            <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
+            @endforeach
             <form class="sell-form" action="/register" method="post">
                 @csrf
                 <section class="item-detail-area">
