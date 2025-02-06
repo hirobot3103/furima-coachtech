@@ -34,7 +34,7 @@
                         
                         @if ( $item['soldout'] == 1)
                         <div class="item-sold-out__discript">
-                            <span>SOLD</span>
+                            <span>Sold</span>
                         </div>
                         
                         @php

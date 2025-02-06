@@ -24,12 +24,16 @@ class PurchaseController extends Controller
         Item::where('id', $itemId)->update($itemParam);
         
         $param = [
-          'user_id' => Auth::user()->id,
-          'item_id' => $itemId,
+          'user_id'         => Auth::user()->id,
+          'item_id'         => $itemId,
           'purchase_method' => $request->purchase_method,
+          'price'           => $request->price,
+          'post_number'     => $request->post_number,
+          'address'         => $request->address, 
+          'building'        => $request->building,
         ];
-
         Order_list::insert($param);
+
         // $url = "https://www.strip.com";
         // return redirect()->away($url);
         return redirect('/mypage?tag=buy');

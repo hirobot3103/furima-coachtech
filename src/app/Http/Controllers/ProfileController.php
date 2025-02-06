@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-
-        $profileData = Profile::find( Auth::user()->id );
+        $profileData = Profile::where( 'user_id', Auth::user()->id )->first();
 
         return view( 'auth.edit-prof', compact('profileData') );
     }
@@ -20,6 +21,10 @@ class ProfileController extends Controller
     {
 
         if( !empty($request->img_url) ) {
+
+            $input = [ 'img_url' => $request->file('img_url')->getClientOriginalName(),];
+            $this->validateUploadFile($input);
+    
             $filePath = $request->file( 'img_url' )->store( '/public' );
             $filename = pathinfo($filePath, PATHINFO_BASENAME);
         } else {
@@ -41,14 +46,18 @@ class ProfileController extends Controller
     public function update( Request $request )
     {
         $query = Profile::where( 'user_id', Auth::user()->id );
-
+        
         if ( !empty($request->img_url) ){
+
+            // バリデーション位置
+
             $filePath = $request->file( 'img_url' )->store( '/public' );
             $filename = pathinfo($filePath, PATHINFO_BASENAME);            
         } else {
             $imgPath = $query->first();
             $filename =  pathinfo($imgPath['img_url'], PATHINFO_BASENAME);        
         }
+
 
         $param = [
             'user_id'     => Auth::user()->id,
@@ -58,6 +67,9 @@ class ProfileController extends Controller
             'building'    => $request->building,
             'img_url'     => '/storage/' . $filename,
         ];
+
+        // バリデーション位置
+
         $query->update( $param );
 
         return redirect('/');
@@ -84,4 +96,11 @@ class ProfileController extends Controller
 
         return redirect('/purchase/' . $itemId);
     }
+
+    function validateUploadFile(array $input)
+    {
+        $ProfileRequestInstance = new ProfileRequest();
+        Validator::make($input, $ProfileRequestInstance->rules(), $ProfileRequestInstance->messages(),)->validate();
+    }
+
 }
