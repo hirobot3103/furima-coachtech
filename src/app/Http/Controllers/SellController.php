@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category_list;
 use App\Models\Status_list;
 use App\Models\Item;
 use App\Models\Category;
-use App\http\Requests\ExhibitionRequest;
+use App\Http\Requests\ExhibitionRequest;
+// use Illuminate\Http\Request;
 
 class SellController extends Controller
 {

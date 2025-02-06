@@ -76,6 +76,9 @@
                             <td class="purchase-method" ><div id="purchase-method-text" >未　定</div></td>
                         </tr>
                     </table>
+                    @foreach ($errors->all() as $error)
+                    <li class="validatin-error__area">{{$error}}</li>
+                @endforeach
                     <form class="purchase-form" action="/purchase/{{ $itemData[ 'id' ] }}" method="post">
                         @csrf
                         <input type="hidden" name="purchase_method" id="purchase_method">

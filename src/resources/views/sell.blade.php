@@ -47,18 +47,17 @@
                     <p class="item-title">商品名と説明</p>
                     <hr>
                     <p class="iteme-name-title">商品名</p>
-                    <input type="text" class="item-name" name="item_name">
+                    <input type="text" class="item-name" name="item_name" value="{{ old('item_name') }}">
 
                     <p class="iteme-name-title">ブランド名</p>
-                    <input type="text" class="item-name" name="brand_name">
+                    <input type="text" class="item-name" name="brand_name" {{ old('brand_name') }}>
 
                     <p class="iteme-name-title">商品の説明</p>
-                    <textarea name="discription" id="item-discript" class="item-discript">
-
+                    <textarea name="discription" id="item-discript" class="item-discript" {{ old('discription') }}>
                     </textarea>
 
                     <p class="iteme-name-title">販売価格</p>
-                    <input type="text" class="item-prace" name="price" placeholder="&yen;">
+                    <input type="text" class="item-prace" name="price" placeholder="&yen;" value="{{ old('price') }}"">
                 </section>
                 <button class="item-post-btn" type="submit">出品する</button>
             </form>
