@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('post_number',255);
             $table->string('address',255);
             $table->string('building',255)->nullable();
-            $table->string('img_url',255);
+            $table->string('img_url',255)->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });

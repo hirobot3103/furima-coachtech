@@ -14,7 +14,7 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'img_url' => ['regex:/(.jpeg|.png)\z/'],
+            'img_url' => ['regex:/(.jpeg|.jpg|.png)\z/'],
         ];
     }
 

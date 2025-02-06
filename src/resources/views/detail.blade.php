@@ -119,6 +119,9 @@
                     @if ( Auth::check() )
                     <section class="comment-post-area">
                         <p class="comment-post__index">商品へのコメント</p>
+                        @foreach ($errors->all() as $error)
+                        <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
+                        @endforeach
                         <form class="comment-post__form" action="/item/{{ $itemData[ 'id' ] }}" method="post">
                             @csrf
                             <textarea name="comment" id="" class="comment__input">

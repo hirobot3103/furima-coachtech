@@ -40,6 +40,9 @@
     <main class="contents">
         <div class="contents-area">
             <p class="sell-title">住所の変更</p>
+            @foreach ($errors->all() as $error)
+                <li class="validatin-error__area">{{$error}}</li>
+            @endforeach
             <form class="sell-form" action="/purchase/address/{{ $itemId }}" method="post">
                 @csrf
                 @method('PATCH')

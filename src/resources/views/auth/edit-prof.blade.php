@@ -39,9 +39,9 @@
     <main class="contents">
         <div class="contents-area">
             <p class="sell-title">プロフィール設定</p>
-            @error('img_url')
-            <div>{{ $message }}</div>
-            @enderror
+            @foreach ($errors->all() as $error)
+            <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
+            @endforeach
             <form class="sell-form" action="/mypage/profile" method="post" enctype="multipart/form-data">
                 @csrf
                 @if( !empty($profileData) )

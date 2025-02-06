@@ -13,7 +13,10 @@
     <main class="contents">
         <div class="contents-area">
             <p class="sell-title">商品の出品</p>
-            <form class="sell-form" action="" method="post" enctype="multipart/form-data">
+            @foreach ($errors->all() as $error)
+            <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
+            @endforeach
+            <form class="sell-form" action="/sell" method="post" enctype="multipart/form-data">
                 @csrf
                 <section class="uploader-area">
                     <p>商品画像</p>

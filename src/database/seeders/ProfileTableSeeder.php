@@ -28,14 +28,14 @@ class ProfileTableSeeder extends Seeder
 
     private function setProfileSeedUser1()
     {
-        if ( !File::exists( Storage::url( 'prof1.jpg' ) )) 
+        if ( !File::exists( Storage::url( 'prof1.jpeg' ) )) 
         {
-            copy('public/assets/img/prof1.jpg' ,'storage/app/public/prof1.jpg' );
+            copy('public/assets/img/prof1.jpeg' ,'storage/app/public/prof1.jpeg' );
         }
 
         $param =[
             'user_id' => 1,
-            'img_url' => Storage::url('prof1.jpg'),
+            'img_url' => Storage::url('prof1.jpeg'),
         ];
 
         DB::table('profiles')->where('id',1)->update($param);    
@@ -43,14 +43,14 @@ class ProfileTableSeeder extends Seeder
 
     private function setProfileSeedUser2()
     {
-        if ( !File::exists( Storage::url( 'prof2.jpg' ) )) 
+        if ( !File::exists( Storage::url( 'prof2.jpeg' ) )) 
         {
-            copy('public/assets/img/prof2.jpg' ,'storage/app/public/prof2.jpg' );
+            copy('public/assets/img/prof2.jpeg' ,'storage/app/public/prof2.jpeg' );
         }
 
         $param =[
             'user_id' => 2,
-            'img_url' => Storage::url('prof2.jpg'),
+            'img_url' => Storage::url('prof2.jpeg'),
         ];
 
         DB::table('profiles')->where('id',2)->update($param);    
@@ -58,14 +58,14 @@ class ProfileTableSeeder extends Seeder
 
     private function setProfileSeedUser3()
     {
-        if ( !File::exists( Storage::url( 'prof3.jpg' ) )) 
+        if ( !File::exists( Storage::url( 'prof3.jpeg' ) )) 
         {
-            copy('public/assets/img/prof3.jpg' ,'storage/app/public/prof3.jpg' );
+            copy('public/assets/img/prof3.jpeg' ,'storage/app/public/prof3.jpeg' );
         }
 
         $param =[
             'user_id' => 3,
-            'img_url' => Storage::url('prof3.jpg'),
+            'img_url' => Storage::url('prof3.jpeg'),
         ];
 
         DB::table('profiles')->where('id',3)->update($param);    
@@ -73,14 +73,14 @@ class ProfileTableSeeder extends Seeder
 
     private function setProfileSeedUser4()
     {
-        if ( !File::exists( Storage::url( 'prof4.jpg' ) )) 
+        if ( !File::exists( Storage::url( 'prof4.jpeg' ) )) 
         {
-            copy('public/assets/img/prof4.jpg' ,'storage/app/public/prof4.jpg' );
+            copy('public/assets/img/prof4.jpeg' ,'storage/app/public/prof4.jpeg' );
         }
 
         $param =[
             'user_id' => 4,
-            'img_url' => Storage::url('prof4.jpg'),
+            'img_url' => Storage::url('prof4.jpeg'),
         ];
 
         DB::table('profiles')->where('id',4)->update($param);    
@@ -89,14 +89,14 @@ class ProfileTableSeeder extends Seeder
     private function setProfileSeedUser5()
     {
 
-        if ( !File::exists( Storage::url( 'prof5.jpg' ) )) 
+        if ( !File::exists( Storage::url( 'prof5.jpeg' ) )) 
         {
-            copy('public/assets/img/prof5.jpg' ,'storage/app/public/prof5.jpg' );
+            copy('public/assets/img/prof5.jpeg' ,'storage/app/public/prof5.jpeg' );
         }
 
         $param =[
             'user_id' => 5,
-            'img_url' => Storage::url('prof5.jpg'),
+            'img_url' => Storage::url('prof5.jpeg'),
         ];
 
         DB::table('profiles')->where('id',5)->update($param);    
