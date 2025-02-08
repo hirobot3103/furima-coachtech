@@ -62,7 +62,7 @@ class ItemDetailController extends Controller
     public function setFavoritOrComment( CommentRequest $request, int $ItemId)
     {
         if( $request->has('myfavorit') ) {
-            
+
             if( $request->myfavoritFlg > 0 ) {
                 
                 // いいねを解除
@@ -78,7 +78,7 @@ class ItemDetailController extends Controller
 
             }
 
-            return redirect('/item/' . $ItemId )->withInput();
+            return redirect('/item/' . $ItemId );
         }
 
         if ( $request->has('commentReg') )

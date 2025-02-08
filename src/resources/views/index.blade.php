@@ -7,14 +7,24 @@
 @endsection
 
 @section('page-main')
-
-    <x-header></x-header>
+ 
+    <x-header>{{ $urlData['locationUrl'] }}</x-header>
 
     <main class="contents">
-
         <ul>
-            <li><a href="/"><span class="contents__current-page">おすすめ</span></a></li>
-            <li><a href="/?tag=mylist"><span>マイリスト</span></a></li>
+            @php 
+                $urlRoot = '/';
+                $urlMyList = '/?tag=mylist';
+            @endphp
+
+            @if ( session('message') )
+            @php 
+                $urlRoot = '/?keyword=' . session('message');
+                $urlMyList = '/?tag=mylist&keyword=' . session('message');
+            @endphp
+            @endif
+            <li><a href="{{ $urlRoot }}"><span class="contents__current-page">おすすめ</span></a></li>
+            <li><a href="{{ $urlMyList }}"><span>マイリスト</span></a></li>
         </ul>
         
         <hr>
@@ -30,12 +40,8 @@
 
                 <li class="contents__item">
 
-                    {{-- @if( !empty($keySentence) )
-                    <a href="/item/{{$item['id']}}?keyword={{ $keySentence }}" class="item-detail__link">
-                    @else --}}
+
                     <a href="/item/{{$item['id']}}" class="item-detail__link">
-                    {{-- @endif 
-                         --}}
                         @if ( $item['soldout'] == 1)
                         <div class="item-sold-out__discript">
                             <span>Sold</span>
@@ -57,4 +63,26 @@
             </ul>
         </section>
     </main>
+    <script>
+        // document.getElementById("search-box").onkeypress = (e) => {
+        //     const key = e.keyCode || e.charCode || 0;
+    
+        //     if (key == 13) {
+
+        //         const keyword = document.getElementById("ky").value;
+        //         const url = "/";
+        //         const formData = new URLSearchParams();
+        //         formData.append('keyword', keyword);
+        //         const body = formData.toString();
+
+        //         fetch(url, { 
+        //             method: 'GET', 
+        //             headers: {
+        //                 'Content-Type': 'application/x-www-form-urlencoded'
+        //             },
+        //             body: body 
+        //         });
+        //     }
+        // }
+    </script>
 @endsection

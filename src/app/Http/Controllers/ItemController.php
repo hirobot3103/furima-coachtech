@@ -19,16 +19,23 @@ class ItemController extends Controller
             return redirect( '/mypage/profile' );
         }
 
+        $keyword = "";
+        $urlData = [];
 
         // mylist選択時
         if ( $request->has('tag') && $request->tag == 'mylist' )
         {
 
+            $urlData = [
+                'locationUrl' => "/?tag=" . $request->tag,
+            ];
+
             // 未認証の場合は何も表示しない
             if ( empty( Auth::user() )) 
             {
                 $itemData = [];
-                return view( 'mylist' , ['itemData' => $itemData]);
+                session()->flash('message', $keyword);                
+                return view( 'mylist' , compact('itemData', 'urlData'));
             }
 
             
@@ -39,33 +46,43 @@ class ItemController extends Controller
                 $whereIn[] = $item['item_id'];
             }
             if ($request->has('keyword')){
-                $itemData = Item::whereIn('id', $whereIn)->KeySearch($request->keyword)->get();
+                $keyword = $request->keyword;
+                $itemData = Item::whereIn('id', $whereIn)->KeySearch($keyword)->get();
             } else {
                 $itemData = Item::whereIn('id', $whereIn)->get();            
             }
 
-            return view( 'mylist' , compact( 'itemData' ) );
+            session()->flash('message', $keyword);
+            return view( 'mylist' , compact('itemData', 'urlData'));
         }
 
 
         // 商品一覧表示
+        $urlData = [
+            'locationUrl' => "/",
+        ];
+
         if ( empty( Auth::user() ) ){
             if ($request->has('keyword')){
-                $itemData = Item::KeySearch($request->keyword)->get();
+                $keyword = $request->keyword;
+                $itemData = Item::KeySearch($keyword)->get();
             } else {
                 $itemData = Item::all();
             }
-            return view( 'index' , compact( 'itemData' ) );
+            session()->flash('message', $keyword);
+            return view( 'index' , compact('itemData', 'urlData'));
         }
 
         if ($request->has('keyword')){
-            $itemData = Item::where('user_id', '!=', Auth::user()->id)->KeySearch($request->keyword)->get();
-            $keySentence = [ 'keyword' => $request->keyword, ];
+
+            $keyword = $request->keyword;
+            $itemData = Item::where('user_id', '!=', Auth::user()->id)->KeySearch($keyword)->get();
         } else {
             $itemData = Item::where('user_id', '!=', Auth::user()->id)->get();
-            $keySentence = [ 'keyword' => "", ];
+
         }
-        
-        return view( 'index' , compact( 'itemData', 'keySentence' ) );
+
+        session()->flash('message', $keyword);
+        return view( 'index' , compact('itemData', 'urlData'));
     }
 }

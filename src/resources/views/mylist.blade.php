@@ -8,15 +8,24 @@
 
 @section('page-main')
 
-    <x-header></x-header>
-
+    <x-header>{{$urlData['locationUrl']}}</x-header>
     <main class="contents">
-
         <ul>
-            <li><a href="/"><span>おすすめ</span></a></li>
-            <li><a href="/?tag=mylist"><span class="contents__current-page">マイリスト</span></a></li>
+            @php 
+                $urlRoot = '/';
+                $urlMyList = '/?tag=mylist';
+            @endphp
+
+            @if ( session('message') )
+            @php 
+                $urlRoot = '/?keyword=' . session('message');
+                $urlMyList = '/?tag=mylist&keyword=' . session('message');
+            @endphp
+            @endif
+            <li><a href="{{ $urlRoot }}"><span>おすすめ</span></a></li>
+            <li><a href="{{ $urlMyList }}"><span class="contents__current-page">マイリスト</span></a></li>
         </ul>
-        
+      
         <hr>
         
         <section class="contents__lists-area">
@@ -34,7 +43,7 @@
                         
                         @if ( $item['soldout'] == 1)
                         <div class="item-sold-out__discript">
-                            <span>SOLD</span>
+                            <span>Sold</span>
                         </div>
                         
                         @php
@@ -53,4 +62,29 @@
             </ul>
         </section>
     </main>
+    <script>
+
+        // document.getElementById("search-box").onkeypress = (e) => {
+        //     const key = e.keyCode || e.charCode || 0;
+        //     console.log(key);
+        //     if (key == 13) {
+
+        //         const keyword = document.getElementById("ky").value;
+        //         const url = "/?tag=mylist&keyword=${keyword}";
+        //         location.href = url;
+        //         // const formData = new URLSearchParams();
+        //         // formData.append('tag', 'mylist');
+        //         // formData.append('keyword', keyword);
+        //         // const body = formData.toString();
+
+        //         // fetch(url , { 
+        //         //     method: 'GET', 
+        //         //     headers: {
+        //         //         'Content-Type': 'application/x-www-form-urlencoded'
+        //         //     },
+        //         //     body: body
+        //         // });
+        //     }
+        // } 
+    </script>
 @endsection

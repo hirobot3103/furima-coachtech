@@ -1,11 +1,19 @@
 <header class="page-header">
         <div class="page-logo">
-            <a href="/">
+            <a href="/" class="page-logo">
                 <img src="{{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
             </a>
         </div>
-        <form action="" class="page-search">
+        <form action="{{ $slot }}" class="page-search" id='search-box' method="GET">
+            @if ( session('message') )
+            @php 
+                $keyword = session('message');
+            @endphp
+            <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？" value="{{ $keyword }}">
+            @else
             <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？">
+            @endif
+
         </form>
         <nav class="page-menu">
             <ul>
@@ -24,4 +32,3 @@
             </ul>
         </nav>
     </header>
-    {{ $slot }}

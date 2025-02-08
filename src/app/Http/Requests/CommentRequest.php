@@ -14,8 +14,8 @@ class CommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'comment' => [ 'required' , 'max:255',] ,
-        ];
+            'comment' =>'exclude_unless:commentReg,1 | required | max:255',
+        ]; 
     }
 
     public function messages()

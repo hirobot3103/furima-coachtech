@@ -19,7 +19,7 @@
 
                 @if ( $itemData['soldout'] == 1)
                     <div class="item-sold-out__discript">
-                        <span>SOLD</span>
+                        <span>Sold</span>
                     </div>
                     
                     @php
@@ -38,13 +38,13 @@
                             <form action="/item/{{ $itemData[ 'id' ] }}" method="post">
                                 @csrf
                                 <input type="hidden" name="myfavoritFlg" value={{ $favoritData[ 'myfavorit' ] }}>
-                                <button type="submit" name="myfavorit" value="1">
-                                @if ( $favoritData[ 'myfavorit' ] > 0 )
-                                    <img src="{{ asset( '/assets/img/icons8-star-48.svg') }}" alt="いいねアイコン">
-                                @else
-                                    <img src="{{ asset( '/assets/img/star.svg' ) }}" alt="いいねアイコン">
-                                @endif
-                                </button>
+                                <button type="submit" name="myfavorit" value="1" id="myfavorit">
+                                    @if ( $favoritData[ 'myfavorit' ] > 0 )
+                                        <img src="{{ asset( '/assets/img/icons8-star-48.svg') }}" alt="いいねアイコン">
+                                    @else
+                                        <img src="{{ asset( '/assets/img/star.svg' ) }}" alt="いいねアイコン">
+                                    @endif
+                                </button>        
                             </form>
                             <figcaption>{{ $favoritData[ 'count' ] }}</figcaption>
                         </figure>
@@ -125,8 +125,9 @@
                         <form class="comment-post__form" action="/item/{{ $itemData[ 'id' ] }}" method="post">
                             @csrf
                             <textarea name="comment" id="" class="comment__input">
-                            </textarea>
-                            <button name="commentReg" class="post-btn" type="submit" value=1 >コメントを送信する</button>
+                            {{ old('comment')}}
+                            </textarea>  
+                            <button name="commentReg" class="post-btn" type="submit" value=1 id="commentReg">コメントを送信する</button>
                         </form>
                     </section>
                     @endif
