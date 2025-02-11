@@ -22,6 +22,7 @@ class PurchaseRequest extends FormRequest
 
     public function messages()
     {
+        // purchase_method.required_ifへ変更すること
         return [
             'purchase_method.required' => "お支払い方法を選択してください",
             'post_number.required'     => "配送先の郵便番号を設定してください",

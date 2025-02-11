@@ -9,10 +9,13 @@ use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellController;
 
+// 未認証でも表示
 Route::get('/', [ItemController::class,'index']);
 Route::get('/item/{itemId}', [ItemDetailController::class,'detail']);
 
 Route::middleware('auth')->group(function () {
+
+  // メール承認待ち
 
   Route::post('/item/{itemId}', [ItemDetailController::class,'setFavoritOrComment']);
   
