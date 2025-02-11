@@ -34,4 +34,13 @@ class RegisterRequest extends FormRequest
             'password_confirmation.min'      => '確認用パスワードは8文字以上で入力してください',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'email'                 => 'メールアドレス',
+            'password'              => 'パスワード',
+            'password_confirmation' => '確認用パスワード',
+        ];
+    }
 }

@@ -24,4 +24,12 @@ class ProfileRequest extends FormRequest
             'img_url.regex' => 'プロフィール画像の拡張子はjpegまたはpngです。',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'img_url' => 'プロフィール画像',
+        ];
+    }
+
 }

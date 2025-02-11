@@ -39,4 +39,17 @@ class ExhibitionRequest extends FormRequest
             'price.min'                 => "商品価格は0円以上でせっていしてください",
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'item_name'   => '商品名',
+            'discription' => '商品説明',
+            'img_url'     => '商品画像',
+            'cat1'        => "商品カテゴリー",
+            'status'      => "商品状態",
+            'price'       => "商品価格",
+        ];
+    }
+
 }

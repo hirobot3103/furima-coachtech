@@ -18,6 +18,10 @@ class ProfileTableSeeder extends Seeder
         Profile::factory()->count(5)->create();
 
         // Userデータと整合させる
+        if ( !File::exists( Storage::url( 'prof.jpeg' ) )) 
+        {
+            copy('public/assets/img/prof.jpeg' ,'storage/app/public/prof.jpeg' );
+        }
         $this->setProfileSeedUser1();
         $this->setProfileSeedUser2();
         $this->setProfileSeedUser3();

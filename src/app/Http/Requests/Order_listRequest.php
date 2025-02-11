@@ -27,4 +27,12 @@ class Order_listRequest extends FormRequest
             'address.required'     => '住所を入力してください',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'post_number' => '郵便番号',
+            'address' => '住所',
+        ];
+    }
 }

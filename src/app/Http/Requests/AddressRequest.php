@@ -34,4 +34,13 @@ class AddressRequest extends FormRequest
             'address.required'     => '住所を入力してください',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'お名前',
+            'post_number' => '郵便番号',
+            'address' => '住所',
+        ];
+    }
 }
