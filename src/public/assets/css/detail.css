@@ -7,87 +7,12 @@
     --hd-serch-bgcolor: #fff;
     --hd-menu-btn-forecolor: #000;
     --hd-menu-btn-bgcolor: #fff;
-
-    --main-page-forecolor: #5f5f5f;
-    --main-bgcolor: #fff;
-    --main-current-page: #ff0000;
-}
-
-body {
+  }
+  
+  body {
     font-size: 1.6vw;
-}
-
-.page-header {
-    display: flex;
-    width: 100vw;
-    height: 5.31vw;
-    background-color: var(--hd-bgcolor);
-    color: var(--hd-forecolor);
-}
-
-.page-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 32.1vw;
-    height:100%;
-}
-
-.page_logo > a {
-    display: contents;
-}
-
-.page-logo > img {
-    width: 24.4vw;
-    height: 2.3vw;
-}
-
-.page-search {
-    width: 37.2vw;
-    height:100%;
-    line-height: 5.31vw;
-}
-
-.page-search > input {
-    width: 33.06vw;
-    height: 3.30vw;
-    border-radius: 0.5vw;
-    color: var(--hd-serch-forecolor);
-    background-color: var(--hd-serch-bgcolor);
-}
-
-.page-search > input::placeholder {
-    padding-left: 2.0vw;
-    color: var(--hd-serch-forecolor);
-}
-
-.page-menu {
-    width: 30.7vw;
-    height:100%;
-    line-height: 5.31vw;
-}
-
-.page-menu-btn {
-    cursor: pointer;
-}
-
-.page-menu > ul {
-    display: flex;
-    justify-content: space-around;
-}
-
-.page-menu__listing {
-    display: inline-block;
-    margin: calc( (5.31vw - 3.3vw ) / 2 ) 0;
-    width: 6.61vw;
-    height: 3.30vw;
-    border-radius: 0.5vw;
-    text-align: center;
-    line-height: 3.3vw;
-    color: var(--hd-menu-btn-forecolor);
-    background-color: var(--hd-menu-btn-bgcolor);
-}
-
+  }
+  
 .contents {
     width: 100vw;
     padding-top: 5.9vw;
@@ -201,10 +126,6 @@ body {
     margin: 3vw 0 0 0;
 }
 
-.item-status__table  tr {
-    /* height: 4vw; */
-}
-
 .item-status__table  td {
     font-size: 1.58vw;
     font-weight: bold;
@@ -233,6 +154,9 @@ body {
     border-radius: 0.5vw;
 }
 
+.status_area {
+    text-align: left;
+}
 .status-mod {
     min-width: 6.61vw;
     max-width: 13.22vw;
@@ -241,7 +165,6 @@ body {
     line-height: 1.98vw;
     font-size: 1.32vw;
     font-weight: normal;
-    text-align: center;
 }
 
 .item-comment__board {
@@ -334,5 +257,3 @@ body {
     filter: grayscale(100%);
 }
 /* SOLD OUT 表示関係 ここまで　*/
-
-

@@ -8,8 +8,14 @@
 
 @section('page-main')
     
-    <x-header></x-header>
-    
+    <x-header>
+        @isset($session['keyword'])
+            <x-slot name="keyword">{{ $urlData['keyword'] }}</x-slot>
+        @else
+            <x-slot name="keyword"></x-slot>
+        @endisset
+    </x-header>
+
     <main class="contents">
         <div class="contents-area">
             <section class="item-info-area">
@@ -78,7 +84,7 @@
                     </table>
                     @foreach ($errors->all() as $error)
                     <li class="validatin-error__area">{{$error}}</li>
-                @endforeach
+                    @endforeach
                     <form class="purchase-form" action="/purchase/{{ $itemData[ 'id' ] }}" method="post">
                         @csrf
                         <input type="hidden" name="purchase_method" id="purchase_method">
@@ -86,6 +92,8 @@
                         <input type="hidden" name="post_number" id="post_number" value="{{ $profileData['post_number'] }}">
                         <input type="hidden" name="address" id="address" value="{{ $profileData['address'] }}">
                         <input type="hidden" name="building" id="building" value="{{ $profileData['building'] }}">
+                        <input type="hidden" name="order_state" id="order_state" value="1">
+
                         <button type="submit">購入する</button>
                     </form>
                 </section>
@@ -104,4 +112,20 @@
             };
         }
     </script>
+    <script>
+        const form = document.querySelector("#search-box");
+
+        async function sendData() {
+                
+            const keyword = document.getElementById("kw");
+            const url = "/?keyword=" + keyword.value;
+            location.href = url;
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();    
+            sendData();
+        });
+
+    </script>       
 @endsection

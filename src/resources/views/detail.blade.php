@@ -8,7 +8,13 @@
 
 @section('page-main')
 
-    <x-header></x-header>
+    <x-header>
+        @isset($session['keyword'])
+            <x-slot name="keyword">{{ $urlData['keyword'] }}</x-slot>
+        @else
+           <x-slot name="keyword"></x-slot>
+        @endisset
+    </x-header>
 
     <main class="contents">
         <div class="contents-area">
@@ -19,7 +25,7 @@
 
                 @if ( $itemData['soldout'] == 1)
                     <div class="item-sold-out__discript">
-                        <span>Sold</span>
+                        <span>Sold</span>   
                     </div>
                     
                     @php
@@ -78,7 +84,7 @@
                         </tr>
                         <tr>
                             <td>商品の状態</td>
-                            <td><div class="status-mod">{{ $itemData->status_list->status }}</div></td>                            
+                            <td class="status_area"><div class="status-mod">{{ $itemData->status_list->status }}</div></td>                            
                         </tr>
                     </table>
                 </section>
@@ -119,16 +125,26 @@
                     @if ( Auth::check() )
                     <section class="comment-post-area">
                         <p class="comment-post__index">商品へのコメント</p>
-                        @foreach ($errors->all() as $error)
-                        <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
-                        @endforeach
                         <form class="comment-post__form" action="/item/{{ $itemData[ 'id' ] }}" method="post">
                             @csrf
-                            <textarea name="comment" id="" class="comment__input">
-                            {{ old('comment')}}
-                            </textarea>  
+                            @php
+                                $error_stat = 0;    
+                                $preInputData = ""; 
+                                if($errors->has("comment") )
+                                {
+                                    $error_stat = 1;
+                                    $preInputData = old('comment'); 
+                                }   
+                            @endphp
+                            <textarea name="comment" id="" class="comment__input">{{$preInputData}}</textarea>  
+                            @if($error_stat == 1)
+                                @foreach($errors->get("comment") as $errorMassage )
+                                    <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                                @endforeach
+                            @endif
                             <button name="commentReg" class="post-btn" type="submit" value=1 id="commentReg">コメントを送信する</button>
                         </form>
+
                     </section>
                     @endif
                 </section>
@@ -136,4 +152,20 @@
             </section>
         </div>
     </main>
+    <script>
+        const form = document.querySelector("#search-box");
+
+        async function sendData() {
+                
+            const keyword = document.getElementById("kw");
+            const url = "/?keyword=" + keyword.value;
+            location.href = url;
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();    
+            sendData();
+        });
+
+    </script>
 @endsection

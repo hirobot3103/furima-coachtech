@@ -9,7 +9,7 @@
 @section('page-main')
     <header class="page-header">
         <div class="page-logo">
-            <a href="/">
+            <a href="/" class="page-logo">
                 <img src="{{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
             </a>
         </div>
@@ -39,9 +39,6 @@
     <main class="contents">
         <div class="contents-area">
             <p class="sell-title">プロフィール設定</p>
-            @foreach ($errors->all() as $error)
-            <li class="validatin-error__area">&#x274C;&emsp;{{$error}}</li>
-            @endforeach
             <form class="sell-form" action="/mypage/profile" method="post" enctype="multipart/form-data">
                 @csrf
                 @if( !empty($profileData) )
@@ -67,19 +64,44 @@
                         <img src="{{ $profImg }}" alt="" class="prof-img" id="profile-img">
                         <label for="user-img" class="user-img-label">画像を選択する</label>
                         <input type="file" name="img_url" id="user-img" class="user-img">
+                        @if ($errors->has('img_url'))
+                            @foreach($errors->get('img_url') as $errorMassage )
+                                <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                            @endforeach
+                        @endif
                     </div>
                     <p class="iteme-name-title">ユーザー名</p>
                     <input type="text" class="item-name" name="name" value="{{ $name }}">
+                    @if ($errors->has('name'))
+                        @foreach($errors->get('name') as $errorMassage )
+                            <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                        @endforeach
+                    @endif
 
                     <p class="iteme-name-title">郵便番号</p>
                     <input type="text" class="item-name" name="post_number" value="{{ $postCode }}">
+                    @if ($errors->has('post_number'))
+                        @foreach($errors->get('post_number') as $errorMassage )
+                            <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                        @endforeach
+                    @endif
 
                     <p class="iteme-name-title">住所</p>
                     <input type="text" class="item-prace" name="address" value="{{ $address }}">
+                    @if ($errors->has('address'))
+                        @foreach($errors->get('address') as $errorMassage )
+                            <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                        @endforeach
+                    @endif
 
                     <p class="iteme-name-title">建物名</p>
                     <input type="text" class="item-prace" name="building" value="{{ $building }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    @if ($errors->has('building'))
+                        @foreach($errors->get('building') as $errorMassage )
+                            <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                        @endforeach
+                    @endif
                 </section>
                 <button class="item-post-btn" type="submit" name="edit-prof">更新する</button>
             </form>

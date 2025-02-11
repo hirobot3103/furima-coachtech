@@ -40,9 +40,6 @@
     <main class="contents">
         <div class="contents-area">
             <p class="sell-title">住所の変更</p>
-            @foreach ($errors->all() as $error)
-                <li class="validatin-error__area">{{$error}}</li>
-            @endforeach
             <form class="sell-form" action="/purchase/address/{{ $itemId }}" method="post">
                 @csrf
                 @method('PATCH')
@@ -63,9 +60,19 @@
                 <section class="item-detail-area">
                     <p class="iteme-name-title">郵便番号</p>
                     <input type="text" class="item-name" name="post_number" value="{{ $postCode }}">
+                    @if($errors->has("post_number") )
+                        @foreach($errors->get("post_number") as $errorMassage )
+                            <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                        @endforeach
+                    @endif
 
                     <p class="iteme-name-title">住所</p>
                     <input type="text" class="item-prace" name="address" value="{{ $address }}">
+                    @if($errors->has("address") )
+                        @foreach($errors->get("address") as $errorMassage )
+                            <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                        @endforeach
+                    @endif
 
                     <p class="iteme-name-title">建物名</p>
                     <input type="text" class="item-prace" name="building" value="{{ $building }}">
@@ -76,5 +83,4 @@
             </form>
         </div>   
     </main>
-</body>
-</html>
+@endsection

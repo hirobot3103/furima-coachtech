@@ -19,6 +19,7 @@ class Order_ListTableSeeder extends Seeder
                 'post_number'     => "000-0000",
                 'address'         => "東京都牛込局区内",
                 'building'        => "佐川ビル4階",
+                'order_state'     => 1,
             ],
             [
                 'user_id' => 2,
@@ -28,6 +29,7 @@ class Order_ListTableSeeder extends Seeder
                 'post_number'     => "111-1111",
                 'address'         => "東京都練馬区豊玉南",
                 'building'        => "レジデンス大川201",
+                'order_state'     => 1,
             ],
             [
                 'user_id' => 2,
@@ -37,6 +39,7 @@ class Order_ListTableSeeder extends Seeder
                 'post_number'     => "222-0000",
                 'address'         => "東京都練馬区豊玉南",
                 'building'        => "レジデンス大川201",
+                'order_state'     => 1,
             ],
         ];
 

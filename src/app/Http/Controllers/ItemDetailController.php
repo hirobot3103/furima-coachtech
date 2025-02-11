@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Favorit;
@@ -13,7 +15,7 @@ use App\Http\Requests\CommentRequest;
 class ItemDetailController extends Controller
 {
 
-    public function detail( int $itemId )
+    public function detail(Request $request, int $itemId )
     {
         
         // 商品詳細情報を取得
@@ -56,6 +58,10 @@ class ItemDetailController extends Controller
         }
         $profileDatas = Profile::All();
 
+        if( $request->has('keyword')) 
+        {
+            session()->flash('keyword', $request['keyword']);
+        }
         return view( 'detail' , compact( 'itemData' , 'itemCategories', 'favoritData', 'commentDatas', 'commentCount', 'profileDatas' ) );
     }
 

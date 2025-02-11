@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
+use App\Models\Order_list;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\AddressRequest;
+use App\Http\Requests\Order_listRequest;
 
 class ProfileController extends Controller
 {
@@ -25,12 +27,12 @@ class ProfileController extends Controller
             $this->validateUploadFile($input);
     
             $fileExtension = $request->file('img_url')->getClientOriginalExtension();
-            $fileName = 'prof' . Auth::user()->id . $fileExtension;
+            $fileName = 'prof' . Auth::user()->id . '.' . $fileExtension;
             $request->file( 'img_url' )->storeAs( '/public', $fileName );
 
         } 
         else {
-            $filename = 'prof.jpeg';
+            $fileName = 'prof.jpeg';
         }
 
         $input = [ 
@@ -46,7 +48,7 @@ class ProfileController extends Controller
         $profileDatas->post_number = $request->post_number;
         $profileDatas->address     = $request->address;
         $profileDatas->building     = $request->building;
-        $profileDatas->img_url     = '/storage/' . $filename;
+        $profileDatas->img_url     = '/storage/' . $fileName;
         $profileDatas->save();
 
         return redirect('/');
@@ -60,12 +62,14 @@ class ProfileController extends Controller
 
             $input = [ 'img_url' => $request->file('img_url')->getClientOriginalName(),];
             $this->validateUploadFile($input);
+    
+            $fileExtension = $request->file('img_url')->getClientOriginalExtension();
+            $fileName = 'prof' . Auth::user()->id . '.' . $fileExtension;
+            $request->file( 'img_url' )->storeAs( '/public', $fileName );
 
-            $filePath = $request->file( 'img_url' )->store( '/public' );
-            $filename = pathinfo($filePath, PATHINFO_BASENAME);            
         } else {
             $imgPath = $query->first();
-            $filename =  pathinfo($imgPath['img_url'], PATHINFO_BASENAME);        
+            $fileName =  pathinfo($imgPath['img_url'], PATHINFO_BASENAME);        
         }
 
         $param = [
@@ -74,7 +78,7 @@ class ProfileController extends Controller
             'post_number' => $request->post_number,
             'address'     => $request->address,
             'building'    => $request->building,
-            'img_url'     => '/storage/' . $filename,
+            'img_url'     => '/storage/' . $fileName,
         ];
         $this->validateAddress($param);
 
@@ -85,7 +89,37 @@ class ProfileController extends Controller
 
     public function indexAddress(int $itemId)
     {
-        $profileData = Profile::where( 'user_id', Auth::user()->id )->first();
+
+        $profileDatas = Profile::where( 'user_id', Auth::user()->id )->first();       
+
+        $query = Order_list::where('user_id', Auth::user()->id )->where('item_id', $itemId);
+        $orderData = $query->first();
+
+
+        if( empty($orderData) ){
+            $profId       = $profileDatas->id;
+            $profUserId   = $profileDatas->user_id;
+            $profName     = $profileDatas->name;
+            $profPostCode = $profileDatas->post_number;
+            $profAddress  = $profileDatas->address;
+            $profBuilding = $profileDatas->building;
+        } else {        
+            $profId       = $orderData->id;
+            $profUserId   = $orderData->user_id;
+            $profName     = $profileDatas->name;
+            $profPostCode = $orderData->post_number;
+            $profAddress  = $orderData->address;
+            $profBuilding = $orderData->building;
+        }
+
+        $profileData = [
+            'id'          => $profId,
+            'user_id'     => $profUserId,
+            'name'        => $profName,
+            'post_number' => $profPostCode,
+            'address'     => $profAddress,
+            'building'    => $profBuilding,
+        ];
 
         return view('address', compact('itemId', 'profileData'));
     }
@@ -94,14 +128,14 @@ class ProfileController extends Controller
     {
         $param = [
             'user_id'     => Auth::user()->id,
-            'name'        => $request->name,
             'post_number' => $request->post_number,
             'address'     => $request->address,
             'building'    => $request->building,
         ];
-        $this->validateAddress($param);
+        $this->validateOrderAddress($param);
 
-        Profile::where( 'user_id', Auth::user()->id )->update( $param );
+        $query = Order_list::where('user_id', Auth::user()->id )->where('item_id', $itemId);
+        $query->update( $param );
 
         return redirect('/purchase/' . $itemId);
     }
@@ -115,6 +149,12 @@ class ProfileController extends Controller
     private function validateAddress(array $input)
     {
         $addressRequestInstance = new AddressRequest();
+        Validator::make($input, $addressRequestInstance->rules(), $addressRequestInstance->messages(),)->validate();
+    }
+
+    private function validateOrderAddress(array $input)
+    {
+        $addressRequestInstance = new Order_listRequest();
         Validator::make($input, $addressRequestInstance->rules(), $addressRequestInstance->messages(),)->validate();
     }
 }

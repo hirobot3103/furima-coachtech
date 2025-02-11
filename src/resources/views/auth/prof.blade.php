@@ -9,7 +9,7 @@
 @section('page-main')
 <body>
     <header class="page-header">
-        <div class="page-logo">
+        <div class="page-logo" class="page-logo">
             <a href="/">
                 <img src="{{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
             </a>

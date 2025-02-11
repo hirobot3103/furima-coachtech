@@ -14,7 +14,7 @@ class PurchaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'purchase_method' => 'required' ,
+            'purchase_method' => 'required_if:order_state,1|required' ,
             'post_number'     => 'required' ,
             'address'         => 'required' ,
         ];

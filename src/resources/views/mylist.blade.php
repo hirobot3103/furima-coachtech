@@ -8,7 +8,10 @@
 
 @section('page-main')
 
-    <x-header>{{$urlData['locationUrl']}}</x-header>
+    <x-header>
+        <x-slot name="keyword">{{ $urlData['keyword'] }}</x-slot>
+    </x-header>
+
     <main class="contents">
         <ul>
             @php 
@@ -16,10 +19,10 @@
                 $urlMyList = '/?tag=mylist';
             @endphp
 
-            @if ( session('message') )
+            @if ( $urlData['keyword'] )
             @php 
-                $urlRoot = '/?keyword=' . session('message');
-                $urlMyList = '/?tag=mylist&keyword=' . session('message');
+                $urlRoot = '/?keyword=' . $urlData['keyword'];
+                $urlMyList = '/?tag=mylist&keyword=' . $urlData['keyword'];
             @endphp
             @endif
             <li><a href="{{ $urlRoot }}"><span>おすすめ</span></a></li>
@@ -63,28 +66,19 @@
         </section>
     </main>
     <script>
+        const form = document.querySelector("#search-box");
 
-        // document.getElementById("search-box").onkeypress = (e) => {
-        //     const key = e.keyCode || e.charCode || 0;
-        //     console.log(key);
-        //     if (key == 13) {
+        async function sendData() {
+                
+            const keyword = document.getElementById("kw");
+            const url = "{{$urlData['locationUrl']}}&keyword=" + keyword.value;
+            location.href = url;
+        }
 
-        //         const keyword = document.getElementById("ky").value;
-        //         const url = "/?tag=mylist&keyword=${keyword}";
-        //         location.href = url;
-        //         // const formData = new URLSearchParams();
-        //         // formData.append('tag', 'mylist');
-        //         // formData.append('keyword', keyword);
-        //         // const body = formData.toString();
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();    
+            sendData();
+        });
 
-        //         // fetch(url , { 
-        //         //     method: 'GET', 
-        //         //     headers: {
-        //         //         'Content-Type': 'application/x-www-form-urlencoded'
-        //         //     },
-        //         //     body: body
-        //         // });
-        //     }
-        // } 
     </script>
 @endsection

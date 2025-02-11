@@ -4,16 +4,8 @@
                 <img src="{{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
             </a>
         </div>
-        <form action="{{ $slot }}" class="page-search" id='search-box' method="GET">
-            @if ( session('message') )
-            @php 
-                $keyword = session('message');
-            @endphp
+        <form class="page-search" id='search-box'>
             <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？" value="{{ $keyword }}">
-            @else
-            <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？">
-            @endif
-
         </form>
         <nav class="page-menu">
             <ul>

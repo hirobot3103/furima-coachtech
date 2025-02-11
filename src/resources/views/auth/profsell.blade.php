@@ -8,32 +8,10 @@
 
 @section('page-main')
 <body>
-    <header class="page-header">
-        <div class="page-logo">
-            <a href="/">
-                <img src="{{ asset('/assets/img/logo.svg') }}" alt="ロゴ COACHTECH">
-            </a>
-        </div>
-        <form action="" class="page-search">
-            <input type="text" name="keyword" id="kw" class="page-input-keyword" placeholder="なにをお探しですか？">
-        </form>
-        <nav class="page-menu">
-            <ul>
-            @if (Auth::check())
-                <li>
-                    <form action="/logout" method="post">
-                        @csrf
-                        <button type="submit">ログアウト</button>
-                    </form>
-                </li>
-                @else
-                <li><a href="/login">ログイン</a></li>
-                @endif
-                <li><a href="/mypage">マイページ</a></li>
-                <li><a class="page-menu__listing" href="/sell">出品</a></li>
-            </ul>
-        </nav>
-    </header>
+    <x-header>
+        <x-slot name="keyword">{{ $urlData['keyword'] }}</x-slot>
+    </x-header>
+    
     <main class="contents">
         <div class="prof-area">
             <img class="prof-img" src="{{ $profileData['img_url'] }}" alt="プロフィール画像">
@@ -41,8 +19,22 @@
             <a href="/mypage/profile" class="prof-link">プロフィールを編集</a>
         </div>
         <ul>
-            <li><a href="/mypage?tag=sell"><span class="contents__current-page" >出品した商品</span></a></li>
-            <li><a href="/mypage?tag=buy"><span>購入した商品</span></a></li>
+            @if ( !empty($urlData['keyword']))
+                @php
+                    $searchParam = "&keyword=" . $urlData['keyword']; 
+                @endphp
+            @else
+                @php
+                    $searchParam = "";
+                @endphp
+            @endif
+            @if ($urlData['tag'] == "1")
+                <li><a href="/mypage?tag=sell{{$searchParam}}"><span class="contents__current-page" >出品した商品</span></a></li>
+                <li><a href="/mypage?tag=buy{{$searchParam}}""><span>購入した商品</span></a></li>                
+            @else
+                <li><a href="/mypage?tag=sell{{$searchParam}}""><span>出品した商品</span></a></li>
+                <li><a href="/mypage?tag=buy{{$searchParam}}""><span class="contents__current-page">購入した商品</span></a></li>                        
+            @endif
         </ul>
         <hr>
         <section class="contents__lists-area">
@@ -59,7 +51,7 @@
                         
                         @if ( $item['soldout'] == 1)
                         <div class="item-sold-out__discript">
-                            <span>SOLD</span>
+                            <span>Sold</span>
                         </div>
                         
                         @php
@@ -77,4 +69,20 @@
             </ul>
         </section>
     </main>
+    <script>
+        const form = document.querySelector("#search-box");
+
+        async function sendData() {
+                
+            const keyword = document.getElementById("kw");
+            const url = "{{$urlData['locationUrl']}}&keyword=" + keyword.value;
+            location.href = url;
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();    
+            sendData();
+        });
+
+    </script>
 @endsection

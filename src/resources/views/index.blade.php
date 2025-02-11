@@ -8,7 +8,9 @@
 
 @section('page-main')
  
-    <x-header>{{ $urlData['locationUrl'] }}</x-header>
+    <x-header>
+        <x-slot name="keyword">{{ $urlData['keyword'] }}</x-slot>
+    </x-header>
 
     <main class="contents">
         <ul>
@@ -17,10 +19,10 @@
                 $urlMyList = '/?tag=mylist';
             @endphp
 
-            @if ( session('message') )
+            @if ( $urlData['keyword'] )
             @php 
-                $urlRoot = '/?keyword=' . session('message');
-                $urlMyList = '/?tag=mylist&keyword=' . session('message');
+                $urlRoot = '/?keyword=' . $urlData['keyword'];
+                $urlMyList = '/?tag=mylist&keyword=' . $urlData['keyword'];
             @endphp
             @endif
             <li><a href="{{ $urlRoot }}"><span class="contents__current-page">おすすめ</span></a></li>
@@ -64,25 +66,19 @@
         </section>
     </main>
     <script>
-        // document.getElementById("search-box").onkeypress = (e) => {
-        //     const key = e.keyCode || e.charCode || 0;
-    
-        //     if (key == 13) {
+        const form = document.querySelector("#search-box");
 
-        //         const keyword = document.getElementById("ky").value;
-        //         const url = "/";
-        //         const formData = new URLSearchParams();
-        //         formData.append('keyword', keyword);
-        //         const body = formData.toString();
+        async function sendData() {
+                
+            const keyword = document.getElementById("kw");
+            const url = "{{$urlData['locationUrl']}}?keyword=" + keyword.value;
+            location.href = url;
+        }
 
-        //         fetch(url, { 
-        //             method: 'GET', 
-        //             headers: {
-        //                 'Content-Type': 'application/x-www-form-urlencoded'
-        //             },
-        //             body: body 
-        //         });
-        //     }
-        // }
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();    
+            sendData();
+        });
+
     </script>
 @endsection

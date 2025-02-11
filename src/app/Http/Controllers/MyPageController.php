@@ -14,22 +14,57 @@ class MyPageController extends Controller
     public function index(Request $request )
     {
 
-        $profileData = Profile::where('user_id', Auth::user()->id )->first();
-        
-        if ( $request->has('tag') && $request->tag == 'sell')
+        // プロフィールが未登録の場合に登録画面へ遷移
+        if( !empty( Auth::user() ) && empty( Profile::where( 'user_id' , Auth::user()->id )->first() ) )
         {
-            $itemData = Item::where('user_id', Auth::user()->id )->get();
-            return view( 'auth.profsell', compact('itemData', 'profileData') );        
+            return redirect( '/mypage/profile' );
         }
 
-        $purchaseDatas = Order_list::where('user_id', Auth::user()->id )->get();
+        $urlData = [
+            'tag'         => 0,
+            'locationUrl' => "/mypage",
+            'keyword'     => "",
+        ];
+
+        $profileData = Profile::where('user_id', Auth::user()->id )->first();
+
+        if ( $request->has('tag') && $request->tag == 'sell')
+        {
+            $query = Item::where('user_id', Auth::user()->id );
+
+            $urlData['tag'] = 1;
+            $urlData['locationUrl'] = "/mypage?tag=" . $request->tag;
+
+            if ($request->has('keyword')) {
+                $urlData['keyword'] = $request->keyword;    
+                $query = $query->KeySearch($request->keyword);
+            } 
+    
+            $itemData = $query->get();
+            return view( 'auth.profsell', compact('itemData', 'profileData', 'urlData') );        
+        }
+
+        $query = Order_list::where('user_id', Auth::user()->id )->where('order_state', '!=', '0');
+        $purchaseDatas = $query->get();
+  
         $whereIn[] = 0;
         foreach($purchaseDatas as $item )
         {
             $whereIn[] = $item['item_id'];
         }
-        $itemData = Item::whereIn('id', $whereIn)->get();
 
-        return view( 'auth.prof', compact('itemData', 'profileData') );
+        $query = Item::whereIn('id', $whereIn);
+
+        $urlData['tag'] = 2;
+        $urlData['locationUrl'] = "/mypage?tag=buy";
+
+        if ($request->has('keyword')) {
+            $urlData['keyword'] = $request->keyword;
+            $query = $query->KeySearch($request->keyword);
+        } 
+
+        $itemData = $query->get();
+
+        return view( 'auth.profsell', compact('itemData', 'profileData', 'urlData') );
     }
 }

@@ -13,11 +13,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('item_id')->constrained('items');
-            $table->integer('purchase_method');
-            $table->integer('price');
+            $table->integer('purchase_method')->nullable(); // null or 0:未指定 1:コンビニ払い 2:カード払い
+            $table->integer('price')->nullable();
             $table->string('post_number',255);
             $table->string('address',255);
             $table->string('building',255)->nullable();
+            $table->integer('order_state');   // 0:購入手続き未完了 1:購入手続き処理完了
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });
