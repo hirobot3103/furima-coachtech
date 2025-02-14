@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
 use App\Models\Order_list;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\Order_listRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -42,14 +42,34 @@ class ProfileController extends Controller
         ];
         $this->validateAddress($input);
 
-        $profileDatas = new Profile();
-        $profileDatas->name        = $request->name;
-        $profileDatas->user_id     = $request->user_id;
-        $profileDatas->post_number = $request->post_number;
-        $profileDatas->address     = $request->address;
-        $profileDatas->building     = $request->building;
-        $profileDatas->img_url     = '/storage/' . $fileName;
-        $profileDatas->save();
+        $query = Profile::where( 'user_id', Auth::user()->id );
+        $profileData = $query->first();
+
+        if ( !empty( $profileData ))
+        {
+            $param = [
+                'user_id'     => Auth::user()->id,
+                'name'        => $request->name,
+                'post_number' => $request->post_number,
+                'address'     => $request->address,
+                'building'    => $request->building,
+                'img_url'     => '/storage/' . $fileName,
+                'prof_reg'    => 1,
+            ];
+
+            $query->update( $param );                
+        }
+        else
+        {
+            $profileDatas = new Profile();
+            $profileDatas->name        = $request->name;
+            $profileDatas->user_id     = $request->user_id;
+            $profileDatas->post_number = $request->post_number;
+            $profileDatas->address     = $request->address;
+            $profileDatas->building    = $request->building;
+            $profileDatas->img_url     = '/storage/' . $fileName;
+            $profileDatas->save();            
+        }
 
         return redirect('/');
     }
@@ -79,6 +99,7 @@ class ProfileController extends Controller
             'address'     => $request->address,
             'building'    => $request->building,
             'img_url'     => '/storage/' . $fileName,
+            'prof_reg'    => 1,
         ];
         $this->validateAddress($param);
 
@@ -103,6 +124,7 @@ class ProfileController extends Controller
             $profPostCode = $profileDatas->post_number;
             $profAddress  = $profileDatas->address;
             $profBuilding = $profileDatas->building;
+            
         } else {        
             $profId       = $orderData->id;
             $profUserId   = $orderData->user_id;
@@ -119,6 +141,7 @@ class ProfileController extends Controller
             'post_number' => $profPostCode,
             'address'     => $profAddress,
             'building'    => $profBuilding,
+            'prof_reg'    => 1,
         ];
 
         return view('address', compact('itemId', 'profileData'));

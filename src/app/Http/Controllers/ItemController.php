@@ -13,9 +13,15 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         // プロフィールが未登録の場合に登録画面へ遷移
-        if( !empty( Auth::user() ) && empty( Profile::where( 'user_id' , Auth::user()->id )->first() ) )
+        if( !empty( Auth::user() ) )
         {
-            return redirect( '/mypage/profile' );
+            $query = Profile::where( 'user_id' , Auth::user()->id );
+            $profData = $query->first();
+
+            if (!empty( $profData ) && $profData['prof_reg'] == 0 )
+            {
+                return redirect( '/mypage/profile' );            
+            }
         }
 
         $keyword = "";
@@ -35,7 +41,6 @@ class ItemController extends Controller
             if ( empty( Auth::user() )) 
             {
                 $itemData = [];
-                // session()->flash('message', $keyword);                
                 return view( 'mylist' , compact('itemData', 'urlData'));
             }
 
@@ -47,16 +52,18 @@ class ItemController extends Controller
                 $whereIn[] = $item['item_id'];
             }
 
-            if ($request->has('keyword')){
+            if ($request->has('keyword'))
+            {
                 $keyword = $request->keyword;
                 $itemData = Item::whereIn('id', $whereIn)->KeySearch($keyword)->get();
-            } else {
+            } 
+            else 
+            {
                 $itemData = Item::whereIn('id', $whereIn)->get();            
             }
 
             $urlData['keyword'] = $keyword;
 
-            // session()->flash('message', $keyword);
             return view( 'mylist' , compact('itemData', 'urlData'));
         }
 
@@ -69,7 +76,6 @@ class ItemController extends Controller
                 $itemData = Item::all();
             }
 
-            // session()->flash('message', $keyword);
             $urlData['keyword'] = $keyword;
 
             return view( 'index' , compact('itemData', 'urlData'));
@@ -82,7 +88,6 @@ class ItemController extends Controller
             $itemData = Item::where('user_id', '!=', Auth::user()->id)->get();
         }
 
-        // session()->flash('message', $keyword);
         $urlData['keyword'] = $keyword;
         return view( 'index' , compact('itemData', 'urlData'));
     }

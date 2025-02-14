@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Profile;
 use App\Models\Order_list;
-
 use App\Http\Requests\PurchaseRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {

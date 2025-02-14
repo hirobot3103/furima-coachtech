@@ -22,11 +22,19 @@ class PurchaseRequest extends FormRequest
 
     public function messages()
     {
-        // purchase_method.required_ifへ変更すること
         return [
             'purchase_method.required_if' => "お支払い方法を選択してください",
             'post_number.required'        => "配送先の郵便番号を設定してください",
             'address.required'            => "配送先の住所を設定してください",
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'purchase_method'  => "お支払い方法",
+            'post_number'      => "配送先の郵便番号",
+            'address.required' => "配送先の住所",
         ];
     }
 }

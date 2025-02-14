@@ -13,7 +13,6 @@ class ExhibitionRequest extends FormRequest
 
     public function rules(): array
     {
-                    // 'img_url'     => [ 'required', 'regex:/(.jpg|.png)/' ],
         return [
             'item_name'   => 'required',
             'discription' => 'required | max:255',

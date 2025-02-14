@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('address',255);
             $table->string('building',255)->nullable();
             $table->string('img_url',255)->nullable();
+            $table->integer('prof_reg');  // 初回登録か登録済みかを判別(0:初回登録)
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });

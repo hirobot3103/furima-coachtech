@@ -21,6 +21,13 @@
             <form class="sell-form" action="/register" method="post">
                 @csrf
                 <section class="item-detail-area">
+                    <p class="iteme-name-title">お名前</p>
+                    <input type="text" class="item-name" name="name" value="{{ old('name') }}">
+                    @if ($errors->has('name'))
+                        @foreach($errors->get('name') as $errorMassage )
+                            <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                        @endforeach
+                    @endif
                     <p class="iteme-name-title">メールアドレス</p>
                     <input type="text" class="item-name" name="email" value="{{ old('email') }}">
                     @if ($errors->has('email'))
