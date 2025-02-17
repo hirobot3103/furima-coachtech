@@ -15,7 +15,7 @@ class TestId15Exhibition extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function 出品商品情報登録_商品出品画面にて必要な情報が保存できること()
+    public function 出品商品情報登録_商品出品画面にて必要な情報が保存できる()
     {
         
         // ログインユーザーしか出品画面に入れない
@@ -24,11 +24,12 @@ class TestId15Exhibition extends TestCase
 
         // ユーザー作成とログイン
         $user = User::factory()->create();
-        $this->actingAs($user);
+        $this->actingAs($user);        
 
         // 出品画面表示
         $response = $this->get('/sell');
         $response->assertStatus(200);
+        $response->assertViewIs('sell');
         $response->assertSee('商品の出品');
 
          Storage::fake('storage');
@@ -36,9 +37,8 @@ class TestId15Exhibition extends TestCase
          // ユーザー作成とログイン
          $user = User::factory()->create();
          $this->actingAs($user);
+         $this->assertAuthenticatedAs($user);
  
-        // 商品情報入力
-
         // 商品画像
         $path = UploadedFile::fake()->image('items99.jpg')->store('storage');
 
@@ -64,16 +64,15 @@ class TestId15Exhibition extends TestCase
  
          // データベースに保存されていることを確認
          $this->assertDatabaseHas('items', [
-             'item_name' => 'テスト商品',
-             'brand_name' => 'テストブランド',
-             'price' => 12345,
+             'item_name'   => 'テスト商品',
+             'brand_name'  => 'テストブランド',
+             'price'       => 12345,
              'discription' => 'テスト商品の説明です。',
-             'soldout' => 0,
-             'status' => 1,
+             'soldout'     => 0,
+             'status'      => 1,
          ]);
  
          // 保存後、リダイレクト先を確認
-         $response->assertRedirect('/mypage?tag=sell');       
-
+         $response->assertRedirect('/mypage?tag=sell');
     }
 }

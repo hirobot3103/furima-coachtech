@@ -30,6 +30,7 @@ class TestId02Login extends TestCase
     {    
         parent::setUp();
 
+        // テスト用ユーザーデータを事前に作成
         $this->makeExhibitUserData();
         $this->makePurchaseUserData();
     }
@@ -104,8 +105,9 @@ class TestId02Login extends TestCase
             'password' => 'password123',
         ]);
 
-        $this->actingAs($purchaseUserData);
-        $this->assertAuthenticated();
+        // 3 . ログインできているかを確認
+        $response->assertStatus(302);
+        $this->assertAuthenticatedAs($purchaseUserData);
 
         // 4. 商品一覧が表示されることを確認
         $response->assertRedirect('/');

@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Item;
 use App\Models\Order_list;
-
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -35,33 +34,47 @@ class TestId14ProfPatch extends TestCase
     }
 
     /** @test */
-    public function ユーザー情報取得_必要な情報が取得できる()
+    public function ユーザー情報変更_変更項目が初期値として過去設定されている()
     {
         global $purchaseUserData, $purchaseProfileData;
 
         // ログインユーザーしか画面に入れない
-        $response = $this->get('/mypage');
+        $response = $this->get('/mypage/profile');
         $response->assertRedirect('/login');
 
         // ユーザーでログイン
         $this->actingAs($purchaseUserData);
         $this->assertAuthenticated();
 
-        // プロフィール編集ページ初期表示（マイページ）を開く
-        $response = $this->get('/mypage/profile',
-            [
-                'id' => $purchaseProfileData->user_id,
-            ]
-        );
+        // プロフィール編集画面表示（変更前）
+        $response = $this->get('/mypage/profile');
+        $response->assertStatus(200);
+        $response->assertViewIs('auth.edit-prof');
+
+        $response->assertSee($purchaseProfileData->name);
+        $response->assertSee($purchaseProfileData->post_number);
+        $response->assertSee($purchaseProfileData->address);
+        $response->assertSee($purchaseProfileData->building);
+
+        // プロフィール情報を変更してみる
+        $response = $this->patch('/mypage/profile',[
+            'user_id'     => $purchaseProfileData->user_id,
+            'name'        => 'newTwstman1',
+            'post_number' => '333-3333',
+            'address'     => '広島県広島市中区',
+            'building'    => 'JJビル',
+        ]);
+
+        // プロフィール編集ページ初期表示(変更後)
+        $response = $this->get('/mypage/profile');
         $response->assertStatus(200);
         $response->assertViewIs('auth.edit-prof');
 
         // 初期表示
-        $response->assertSee($purchaseProfileData->name);
-        $response->assertSee($purchaseProfileData->img_url);
-        $response->assertSee($purchaseProfileData->post_number);
-        $response->assertSee($purchaseProfileData->address);
-        $response->assertSee($purchaseProfileData->building); 
+        $response->assertSee('newTwstman1');
+        $response->assertSee('333-3333');
+        $response->assertSee('広島県広島市中区');
+        $response->assertSee('JJビル'); 
     }
 
     private function makeExhibitUserData()

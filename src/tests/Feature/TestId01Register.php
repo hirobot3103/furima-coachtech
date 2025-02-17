@@ -104,11 +104,8 @@ class TestId01Register extends TestCase
             'email_verified_at' => ''
         ]);
 
-
         // 3. 会員情報がデータベースに登録されていることを確認
-        $this->assertDatabaseHas('users', [
-            'email' => 'test5@example.com',
-        ]);
+        $this->assertDatabaseHas('users', ['email' => 'test5@example.com',]);
 
         // 4. ログイン画面にリダイレクトされることを確認
         $response->assertRedirect('/');
