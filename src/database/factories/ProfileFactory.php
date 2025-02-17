@@ -16,17 +16,16 @@ class ProfileFactory extends Factory
         $userName     = 'user' . $userId;  
         $postCodeBase = $this->faker->postcode();
         $postCode     = substr($postCodeBase, 0, 3) . "-" . substr($postCodeBase, 3, 4);
-
         $address      = $this->faker->prefecture() . $this->faker->city() . $this->faker->streetAddress();
 
         return [
-           'user_id'     => $userId,
+            'user_id'     => $userId,
             'name'        => $userName,
             'post_number' => $postCode,
             'address'     =>  $address,
             'building'    => $this->faker->secondaryAddress(),
             'img_url'     => "",
-            'prof_reg'    => 0,
+            'prof_reg'    => 1,
         ];
     }
 }

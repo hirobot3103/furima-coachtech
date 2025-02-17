@@ -14,20 +14,21 @@ class  LoginRequest extends FortifyLoginRequest
     public function rules(): array
     {
         return [
-            'email'    => 'required | email',
+            'email'    => 'required | email | exists:App\Models\User,email',
             'password' => 'required | min:8',
         ];
     }
 
     public function messages(): array
     {
-        $commonErrorMessage = 'ログイン情報が登録されていません。';
+        $commonErrorMessage = 'ログイン情報が登録されていません';
 
         return [
             'email.required'    => 'メールアドレスを入力してください',
-            'email.email'       => $commonErrorMessage,
+            'email.email'       => 'メール形式で入力してください',
+            'email.exists'      => $commonErrorMessage,
             'password.required' => 'パスワードを入力してください',
-            'password.min'      => $commonErrorMessage,
+            'password.min'      => 'パスワードは8文字以上で入力してください',
         ];
     }
 

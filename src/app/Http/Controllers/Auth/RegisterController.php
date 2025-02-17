@@ -53,8 +53,8 @@ use Laravel\Fortify\Contracts\RegisterViewResponse;
       {
           event(new Registered($user = $creator->create($request->all())));
   
-          // 登録後自動ログインを回避するためにコメントアウト
-          // $this->guard->login($user);
+          // 登録後自動でログイン
+          $this->guard->login($user);
   
           return app(RegisterResponse::class);
       }
