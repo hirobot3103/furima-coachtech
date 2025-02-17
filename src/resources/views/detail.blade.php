@@ -52,11 +52,11 @@
                                     @endif
                                 </button>        
                             </form>
-                            <figcaption>{{ $favoritData[ 'count' ] }}</figcaption>
+                            <figcaption class="favorit-count">{{ $favoritData[ 'count' ] }}</figcaption>
                         </figure>
                         <figure class="comment-action">
                             <img src="{{ asset( '/assets/img/cmnt.svg' ) }}" alt="コメントアイコン">
-                            <figcaption>{{ $commentCount }}</figcaption>
+                            <figcaption class="comment-count">{{ $commentCount }}</figcaption>
                         </figure>
                     </div>
                 </div>

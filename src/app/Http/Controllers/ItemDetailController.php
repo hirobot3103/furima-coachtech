@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Favorit;
 use App\Models\Comment;
 use App\Models\Profile;
 use App\Http\Requests\CommentRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ItemDetailController extends Controller
 {

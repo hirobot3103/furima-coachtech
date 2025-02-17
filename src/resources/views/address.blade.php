@@ -60,9 +60,9 @@
                 <section class="item-detail-area">
                     <p class="iteme-name-title">郵便番号</p>
                     <input type="text" class="item-name" name="post_number" value="{{ $postCode }}">
-                    @if($errors->has("post_number") )
+                    @if($errors->has("post_number") )&#x274C;&emsp;
                         @foreach($errors->get("post_number") as $errorMassage )
-                            <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
+                            <li class="validatin-error__area">{{$errorMassage}}</li> 
                         @endforeach
                     @endif
 

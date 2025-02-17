@@ -14,10 +14,17 @@ class MyPageController extends Controller
     public function index(Request $request )
     {
 
+        $profQuery = Profile::where( 'user_id' , Auth::user()->id );
+
         // プロフィールが未登録の場合に登録画面へ遷移
-        if( !empty( Auth::user() ) && empty( Profile::where( 'user_id' , Auth::user()->id )->first() ) )
+        if( !empty( Auth::user() ) )
         {
-            return redirect( '/mypage/profile' );
+            $query = Profile::where( 'user_id' , Auth::user()->id );
+            $profData = $query->first();
+            if (!empty( $profData ) && $profData['prof_reg'] == 0 )
+            {
+                return redirect( '/mypage/profile' );            
+            }
         }
 
         $urlData = [
@@ -26,7 +33,7 @@ class MyPageController extends Controller
             'keyword'     => "",
         ];
 
-        $profileData = Profile::where('user_id', Auth::user()->id )->first();
+        $profileData = $profQuery->first();
 
         if ( $request->has('tag') && $request->tag == 'sell')
         {

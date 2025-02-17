@@ -51,6 +51,12 @@
                         $address = $profileData['address'];
                         $building = $profileData['building'];
                         $profImg = $profileData['img_url'];
+                        if( $profileData['prof_reg'] == 0)
+                        {
+                            $postCode = old( 'post_number' );
+                            $address = old( 'address' );
+                            $building = old( 'building' );
+                        }
                     } else {
                         $name = old( 'name' );
                         $postCode = old( 'post_number' );

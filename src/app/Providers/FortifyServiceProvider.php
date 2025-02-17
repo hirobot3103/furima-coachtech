@@ -12,17 +12,27 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
-// use Laravel\Fortify\Contracts\LoginResponse;
-// use Laravel\Fortify\Contracts\LogoutResponse;
 
 // // Fortifyでカスタムフォームリクエストを使うために必要
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
-// use Laravel\Fortify\Http\Requests\RegisterRequest as FortifyRegisterRequest;
 use App\Http\Requests\LoginRequest;
-// use App\Http\Requests\RegisterRequest;
+
+use App\Http\Controllers\Auth\RegisterController;
+use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 class FortifyServiceProvider extends ServiceProvider
 {
+    public function register()
+    {
+        // 登録成功後に自動ログインをしない指定をするために
+        // FortifyのRegisterUserControllerをRegisterControllerに切り替え
+        $this->app->singleton(
+            RegisteredUserController::class,
+            RegisterController::class,
+        );    
+    
+    }
+
     public function boot(): void
     {
         Fortify::createUsersUsing(CreateNewUser::class);
@@ -56,5 +66,6 @@ class FortifyServiceProvider extends ServiceProvider
 
         $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
         // $this->app->bind(FortifyRegisterRequest::class, RegisterRequest::class);
+
     }
 }

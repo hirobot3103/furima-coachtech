@@ -1,0 +1,55 @@
+@charset 'UTF-8';
+
+.page-main {
+    width: 100vw;
+    height: 50vw;
+    text-align: center;
+}
+
+.container__message {
+    width: 47.52vw;
+    height: 3.96vw;
+    margin: 18vw auto 5vw auto; 
+    font-size: 1.58vw;
+    font-weight: bold;
+    line-height: 3.96vw;
+}
+
+.container__verify {
+    display: block;
+    width: 16.96vw;
+    height: 4.62vw;
+    margin: 7vw auto 3vw auto;
+    font-size: 1.58vw;
+    line-height: 4.62vw;
+    text-decoration: none;
+    cursor: pointer;
+    color: #000;
+    background-color: #D9D9D9;
+    border: 1px solid #000;
+    border-radius: 1vw;
+}
+
+.container__mail-resend {
+    display: block;
+    width: 16.96vw;
+    margin: 0 auto 5vw auto;
+    font-size: 1.32vw;
+    font-weight: bold;
+    line-height: 4.62vw;
+    text-decoration: none;
+    color: #0073CC;
+    cursor: pointer;
+}
+
+.status__area {
+    width: 30vw;
+    height: 5vw;
+    margin: 0 auto 5vw auto;
+    font-size: 1.32vw;
+    font-weight: bold;
+    line-height: 5vw;
+    text-decoration: none;
+    color: #FFF;
+    background-color: #0073CC;
+}

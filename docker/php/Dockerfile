@@ -10,6 +10,11 @@ RUN curl -sS https://getcomposer.org/installer | php \
   && mv composer.phar /usr/local/bin/composer \
   && composer self-update
 
+  RUN apt-get update &&\
+  apt-get install -y libpng-dev libjpeg62-turbo-dev &&\
+  docker-php-ext-configure gd --with-jpeg &&\
+  docker-php-ext-install -j$(nproc) gd
+
 RUN useradd -m hirobot3103
 
 WORKDIR /var/www

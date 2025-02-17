@@ -14,7 +14,7 @@ class AddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'        => 'required',
+            'name'        => 'required | max:255',
             'post_number' => [
                               'required', 
                               'size:8',
@@ -28,10 +28,20 @@ class AddressRequest extends FormRequest
     {
         return [
             'name.required'        => "お名前を入力してください",
+            'name.max'             => 'お名前は255文字以内で入力してください',
             'post_number.required' => "郵便番号を入力してください",
             'post_number.size'     => "郵便番号はハイフンを含む8文字で入力してください",
-            'post_number.required' => "郵便番号の形式に則って入力してください",
+            'post_number.regex'    => "郵便番号の形式に則って入力してください",
             'address.required'     => '住所を入力してください',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'お名前',
+            'post_number' => '郵便番号',
+            'address' => '住所',
         ];
     }
 }
