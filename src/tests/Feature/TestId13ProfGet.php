@@ -68,7 +68,7 @@ class TestId13ProfGet extends TestCase
         $response->assertSee($exhibitItemData->item_name);
         $response->assertSee($exhibitItemData->img_url);
 
-        // 購入した商品ページを開く
+        // 出品した商品ページを開く
         $response = $this->get('/mypage?tag=sell');
         $response->assertStatus(200);
 
