@@ -114,7 +114,7 @@
                         <div class="contributor-area">
                             <figure class="contributor-prof">
                                 <img src="{{ $profImg }}" alt="プロフィール画像" class="contributor-img">
-                                <figcaption>{{ $currentUserName }}</figcaption>
+                                <figcaption class="contributor-name">{{ $currentUserName }}</figcaption>
                             </figure>
                             <div class="contributor-comment">
                             <p>{{ $comment['comment'] }}</p>

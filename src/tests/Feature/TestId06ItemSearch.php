@@ -103,7 +103,6 @@ class TestId06ItemSearch extends TestCase
         $exhibitUserData = User::factory()->create();
 
         Storage::fake('storage');
-
         $path = UploadedFile::fake()->image('prof998.jpg')->store('storage');
 
         $exhibitProfileData = Profile::factory()->create([

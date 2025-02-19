@@ -8,6 +8,9 @@ use App\Models\Item;
 use App\Models\Order_list;
 use App\Models\Favorit;
 use App\Models\Comment;
+use App\Models\Category_list;
+use App\Models\Category;
+use App\Models\Status_list;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,6 +30,8 @@ class TestId07ItemDetailGet extends TestCase
     protected $orderDatas;
     protected $favoritDatas;
     protected $commentDatas;
+    protected $categoryDatas;
+    protected $statusDatas;
 
     protected function setUp():void
     {    
@@ -40,24 +45,52 @@ class TestId07ItemDetailGet extends TestCase
     /** @test */
     public function 商品詳細情報取得_必要な情報が表示される()
     {
-        global $exhibitItemData, $favoritItemData, $favoritDatas, $commentDatas;
+        global $purchaseProfileData, $favoritItemData, $favoritDatas, $commentDatas, $statusDatas;
 
-        // マイリストページ画面を開く
+        // 商品詳細画面を開く
         $response = $this->get('/item/' . $favoritItemData->id);
         $response->assertStatus(200);
         $response->assertViewIs('detail');
 
-        // 商品詳細の確認
+        // 商品詳細の確認  
         $imgTag = '<img class="item-sold-out__img" src="' . $favoritItemData->img_url . '" alt="' . $favoritItemData->item_name . '">';
-        $response->assertSee($imgTag, false); 
-        $response->assertSee('<p class="item-name">' . $favoritItemData->item_name . '</p>', false);
-        $response->assertSee('<p class="brand-name">' . $favoritItemData->brand_name . '</p>', false);
-        $response->assertSee('<p class="price">&yen;<span>' . number_format($favoritItemData->price), false);
-        $response->assertSee('<figcaption class="favorit-count">1</figcaption>', false);
-        $response->assertSee('<figcaption class="comment-count">1</figcaption>', false);
+        $response->assertSee($imgTag, false);  // 商品画像
 
-        // 残りの詳細を記載すること
+        $response->assertSee('<p class="item-name">' . $favoritItemData->item_name . '</p>', false);  // 商品名
+        $response->assertSee('<p class="brand-name">' . $favoritItemData->brand_name . '</p>', false);  // ブランド名
+        $response->assertSee('<p class="price">&yen;<span>' . number_format($favoritItemData->price), false);  // 商品価格
+        $response->assertSee('<figcaption class="favorit-count">'. $favoritDatas->count() . '</figcaption>', false);  // いいねの数
+        $response->assertSee('<figcaption class="comment-count">' . $commentDatas->count() . '</figcaption>', false);  // コメント数
+        $response->assertSee('<p class="item-discrption__body">' . $favoritItemData->discription . '</p>', false);  // 商品説明 
 
+        $categoryId1 = Category_list::where('id',1)->first();
+        $categoryId2 = Category_list::where('id',2)->first();
+        $response->assertSee('<div class="category-mod">' . $categoryId1->category_name . '</div>', false);  // 選択されたカテゴリー
+        $response->assertSee('<div class="category-mod">' . $categoryId2->category_name . '</div>', false);  // 選択されたカテゴリー
+        $response->assertSee('<div class="status-mod">' . $statusDatas->status . '</div>', false);  // 商品の状態
+        $response->assertSee('<p class="item-comment__index">コメント（ ' . $commentDatas->count() . ' ）</p>', false);  // コメント欄のコメント数
+
+        $imgTag = '<img src="'. $purchaseProfileData->img_url . '" alt="プロフィール画像" class="contributor-img">';
+        $response->assertSee($imgTag, false);  //   プロフィール画像
+        $response->assertSee('<figcaption class="contributor-name">' . $purchaseProfileData->name .'</figcaption>', false);  // コメント投稿者
+        $response->assertSee($commentDatas->comment, false);  // コメント
+    }
+
+    /** @test */
+    public function 複数選択されたカテゴリが表示されている()
+    {
+        global $favoritItemData;
+
+        // 商品詳細画面を開く
+        $response = $this->get('/item/' . $favoritItemData->id);
+        $response->assertStatus(200);
+        $response->assertViewIs('detail');
+
+        // 複数のカテゴリーが表示されているか
+        $categoryId1 = Category_list::where('id', 1)->first();
+        $categoryId2 = Category_list::where('id', 2)->first();
+        $response->assertSee('<div class="category-mod">' . $categoryId1->category_name . '</div>', false);  // 選択されたカテゴリー
+        $response->assertSee('<div class="category-mod">' . $categoryId2->category_name . '</div>', false);  // 選択されたカテゴリー
     }
 
     private function makeExhibitUserData()
@@ -115,7 +148,7 @@ class TestId07ItemDetailGet extends TestCase
     private function makePurchaseUserData()
     {
         global $exhibitItemData, $favoritItemData,$purchaseUserData, $purchaseProfileData, $purchaseItemData,
-               $orderDatas, $favoritDatas, $commentDatas;
+               $orderDatas, $favoritDatas, $commentDatas, $categoryDatas, $statusDatas;
 
         $purchaseUserData = new User;
         $purchaseProfileData = new Profile;
@@ -123,6 +156,7 @@ class TestId07ItemDetailGet extends TestCase
         $orderDatas = new order_list;
         $favoritDatas = new favorit;         
         $commentDatas = new Comment;
+        $categoryDatas = new Category;
 
         // 購入者ユーザー作成(購入１、出品１)
         $purchaseUserData = User::factory()->create();
@@ -177,5 +211,20 @@ class TestId07ItemDetailGet extends TestCase
             'item_id' => $favoritItemData->id,
             'comment' => 'コメントしました。',
         ]);
+
+        // カテゴリーデータ（カテゴリー2件ファッションと家電を選択） 
+        $categoryDatas = Category::insert([
+           [
+            'item_id' => $favoritItemData->id,
+            'category_id' => 1,
+           ], 
+           [
+            'item_id' => $favoritItemData->id,
+            'category_id' => 2,
+           ],
+        ]);
+
+        // 商品の状態データ
+        $statusDatas = Status_list::where('id', $favoritItemData->status)->first();
     }
 }
