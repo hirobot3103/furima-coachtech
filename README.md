@@ -5,10 +5,8 @@
 ## 概要 
 - サービス名　；　coachtechフリマ
 - 機能　　　　：　アイテムの出品と購入を行うためのフリマアプリ
-- システム要件：　案件シート内の機能要件・非機能要件等記載
-
-##  
- 
+- システム要件：　案件シート内の機能要件・非機能要件等記載  
+   
 ## 環境構築  
 1. Dockerビルド  
 (1) 導入したいディレクトリへ移動し、githubからリポジトリを複製
@@ -38,8 +36,21 @@ $ docker-compose up -d --build
 
 ```
 
+() 実際にブラウザ上での動作確認のため、事前にユーザーデータを作成しています。  
+- ログイン用データ
+email|password
+-|-
+user1@frima.com|password1
+user2@frima.com|password2
+user3@frima.com|password5
+user4@frima.com|password4
+user5@frima.com|password5
+
+
 ## テスト環境と実施  
-1. 
+1. テスト項目
+- D項目：　1,2,3,4,5,6,7,8,9,10,12,13,14,15の14個(11番以外)
+
 
 ## 使用技術  
 ・PHP8.3  
