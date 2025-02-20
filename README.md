@@ -38,13 +38,13 @@ $ docker-compose up -d --build
 
 () 実際にブラウザ上での動作確認のため、事前にユーザーデータを作成しています。  
 - ログイン用データ  
-email|password  
--|-  
-user1@frima.com|password1  
-user2@frima.com|password2  
-user3@frima.com|password5  
-user4@frima.com|password4  
-user5@frima.com|password5  
+|email|password|  
+|----|----|  
+|user1@frima.com|password1|  
+|user2@frima.com|password2|  
+|user3@frima.com|password5|  
+|user4@frima.com|password4|  
+|user5@frima.com|password5|  
   
 
 ## テスト環境と実施  
