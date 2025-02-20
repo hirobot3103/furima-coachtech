@@ -62,10 +62,19 @@ docker-compose exec php bash
 php artisan key:generate
 exit
 ```
-(4)そのほか  
--本アプリでは、fortifyを利用しています。(導入の参考 https://qiita.com/MS-0610/items/d86c0936b4b06aedc759 )  
-() 実際にブラウザ上での動作確認のため、事前にユーザーデータを作成しています。  docker-compose exec php bash
+(4) データベースの作成
+- テーブルの構成や予め必要なデータを作成します。  
+```
+docker-compose exec php bash
+php artisan migrate
+php artisan db:seed
+```  
+(5)  実行  
+- 実際にアプリを利用する場合は、http://locaohost/　へアクセスしてください。  
 
+(6)そのほか  
+- 本アプリでは、fortifyを利用しています。(導入の参考 https://qiita.com/MS-0610/items/d86c0936b4b06aedc759 )  
+- 実際にブラウザ上での動作確認のため、事前にユーザーデータを作成しています。
 - ログイン用データ
   email            password  
 1 user1@frima.com  password1  
@@ -73,12 +82,28 @@ exit
 3 user3@frima.com  password5  
 4 user4@frima.com  password4  
 5 user5@frima.com  password5  
-  
 
 ## テスト環境と実施  
 1. テスト項目
-- D項目：　1,2,3,4,5,6,7,8,9,10,12,13,14,15の14個(11番以外)
+- D項目：　1,2,3,4,5,6,7,8,9,10,12,13,14,15の14個(11番以外)  
 
+2.　テストへの準備  
+- テストを行う前に準備をします。
+```
+docker-compose exec php bash
+php artisan key:generate  --env=testing
+php artisan migrate  --env=testing
+php artisan db:seed  --class=TestDatabaseSeeder --env=testing
+```
+3. テスト実施
+- 一括テストの場合
+```
+php artisan test tests/Feature/*
+```
+- 個別のテストの場合
+```
+php artisan test tests/Feature/(個々のファイル名)
+```
 
 ## 使用技術  
 ・PHP8.3  
