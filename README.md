@@ -6,7 +6,8 @@
 - サービス名　；　coachtechフリマ
 - 機能　　　　：　アイテムの出品と購入を行うためのフリマアプリ
 - システム要件：　案件シート内の機能要件・非機能要件等記載
- 
+
+##  
  
 ## 環境構築  
 1. Dockerビルド  
@@ -31,13 +32,25 @@ $ docker-compose up -d --build
 ```
 ＊最初のビルドでは、完了までに時間を要す場合いがあります。  
 
-(2) 複製したリポジトリ内の src/.envファイルなどを編集していきます。
-```
+2. Laravelの設定等
+(1) 複製したリポジトリ内の src/.envファイルなどを編集していきます。
+``` 
 
 ```
 
+## テスト環境と実施  
+1. 
 
-## ER図
+## 使用技術  
+・PHP8.3  
+・Laravel 10  
+・MySQL 8.0.26  
+
+## URL  
+Github git@github.com:hirobot3103/contact-form-fashionablylate.git  
+開発環境　http://locaohost:80/ , http://locaohost:8080   
+
+## ER図  
 - テーブル仕様書については、案件シート内に記載
 <img src="./doc/img/erimg.jpg">
 
