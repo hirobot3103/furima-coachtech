@@ -34,14 +34,39 @@ $ docker-compose up -d --build
 (1) composerのインストールや複製したリポジトリ内の src/.envファイルなどを編集していきます。  
 ``` 
 docker-compose exec php bash
+composer install
 cp .env.example .env
+exit
 ```
-(2) .envファイルの編集
-``` .envファイルの中身
 
+(2) .envファイルの編集（編集該当部分）
+-textエディターを利用し、以下のように書き換えます。
 ```
-() 実際にブラウザ上での動作確認のため、事前にユーザーデータを作成しています。  
-- ログイン用データ  
+APP_NAME=Furima
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=frimas_db
+DB_USERNAME=frimas_user
+DB_PASSWORD=frimas_pass
+```
+(3).envファイルの編集が終ったら、暗号化キーを設定します。  
+-このコマンドは、Laravelアプリケーションの暗号化キーを生成します。このキーは、セッションデータの暗号化やその他のセキュリティ機能に使用されます。  
+```
+docker-compose exec php bash
+php artisan key:generate
+exit
+```
+(4)そのほか  
+-本アプリでは、fortifyを利用しています。(導入の参考 https://qiita.com/MS-0610/items/d86c0936b4b06aedc759 )  
+() 実際にブラウザ上での動作確認のため、事前にユーザーデータを作成しています。  docker-compose exec php bash
+
+- ログイン用データ
   email            password  
 1 user1@frima.com  password1  
 2 user2@frima.com  password2  
