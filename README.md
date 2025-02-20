@@ -2,5 +2,7 @@
 
 <img src='./doc/img/topimg.jpg'> 
 
-## 概要
+## 概要 
+- サービス名
+- coachtechフリマ
 
