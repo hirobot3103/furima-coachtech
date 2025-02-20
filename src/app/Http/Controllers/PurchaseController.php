@@ -18,15 +18,17 @@ class PurchaseController extends Controller
 
         if( empty($itemDatas->item) ) {
 
+            // 初めて購入画面を開いたとき、決済未完了として注文データを新規作成
+            // 住所はプロフィールにある住所を初期値とする
             $profileData = Profile::where('user_id', Auth::user()->id )->first();
             
             $orderTable = new Order_list();
-            $orderTable->user_id     = Auth::user()->id;
-            $orderTable->item_id     = $itemId;
-            $orderTable->post_number = $profileData->post_number;
-            $orderTable->address     = $profileData->address;
-            $orderTable->building    = $profileData->building;
-            $orderTable->order_state = 0;
+            $orderTable->user_id         = Auth::user()->id;
+            $orderTable->item_id         = $itemId;
+            $orderTable->post_number     = $profileData->post_number;
+            $orderTable->address         = $profileData->address;
+            $orderTable->building        = $profileData->building;
+            $orderTable->order_state     = 0; // 未決済を示す
             $orderTable->save();
 
             $itemData = Item::where('id', $itemId)->first();
@@ -45,7 +47,6 @@ class PurchaseController extends Controller
                 'status'      => $itemDatas->item->status,
                 'img_url'     => $itemDatas->item->img_url,
             ];
-
         }
         
         return view( 'purchase', compact('itemData', 'profileData'));

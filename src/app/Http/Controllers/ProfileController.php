@@ -159,7 +159,7 @@ class ProfileController extends Controller
 
         $query = Order_list::where('user_id', Auth::user()->id )->where('item_id', $itemId);
         $query->update( $param );
-
+        
         return redirect('/purchase/' . $itemId);
     }
 

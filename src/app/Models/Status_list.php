@@ -9,6 +9,10 @@ class Status_list extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'status',
+    ];
+
     public function item()
     {
         return $this->HasMany( 'App\Models\Item' , 'status' );

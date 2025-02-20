@@ -21,12 +21,10 @@ class TestId09CommentSet extends TestCase
 
     protected $exhibitUserData; 
     protected $exhibitProfileData;
-    protected $exhibitItemData;
     protected $favoritItemData;
     protected $purchaseUserData;
     protected $purchaseProfileData;
     protected $purchaseItemData;
-    protected $orderDatas;
     protected $favoritDatas;
     protected $commentDatas;
     protected $categoryDatas;
@@ -149,14 +147,13 @@ class TestId09CommentSet extends TestCase
 
     private function makeExhibitUserData()
     {
-        global $exhibitUserData, $exhibitProfileData, $exhibitItemData,  $favoritItemData;
+        global $exhibitUserData, $exhibitProfileData, $favoritItemData;
         
         $exhibitUserData = new User;
         $exhibitProfileData = new Profile;
-        $exhibitItemData = new Item;
         $favoritItemData = new Item;
     
-        // 出品者ユーザー作成(出品１)
+        // 出品者ユーザー作成
         $exhibitUserData = User::factory()->create();
 
         Storage::fake('storage');
@@ -170,19 +167,6 @@ class TestId09CommentSet extends TestCase
             'building' => 'アパート',
             'img_url' => $path,
             'prof_reg' => 1,
-        ]);
-
-        // 購入者ユーザーに購入される出品データを作成
-        $pathExhibit = UploadedFile::fake()->image('item998.jpg')->store('storage');
-        $exhibitItemData = Item::create([
-            'user_id'     => $exhibitProfileData->user_id,
-            'item_name'   => 'test商品',
-            'brand_name'  => 'test',
-            'price'       => 100,
-            'discription' => '購入者ユーザーに購入される商品です',
-            'soldout'     => 1,
-            'status'      => 1,
-            'img_url'     => $pathExhibit,        
         ]);
 
         // 購入者ユーザーにいいね、コメントされる出品データを作成
@@ -201,7 +185,7 @@ class TestId09CommentSet extends TestCase
 
     private function makePurchaseUserData()
     {
-        global $exhibitItemData, $favoritItemData,$purchaseUserData, $purchaseProfileData, $purchaseItemData,
+        global $favoritItemData,$purchaseUserData, $purchaseProfileData, $purchaseItemData,
                $orderDatas, $favoritDatas, $commentDatas, $categoryDatas, $statusDatas;
 
         $purchaseUserData = new User;
@@ -240,24 +224,6 @@ class TestId09CommentSet extends TestCase
             'status'      => 1,
             'img_url'     => $pathPurchase,        
         ]);
-
-        // 注文データを作成
-        $orderDatas = Order_list::create([
-            'user_id' => $purchaseItemData->user_id,
-            'item_id' => $exhibitItemData->id,
-            'purchase_method' => 1,
-            'price'           => $exhibitItemData->price,
-            'post_number'     => $purchaseProfileData->post_number,
-            'address'         => $purchaseProfileData->address,
-            'building'        => $purchaseProfileData->building,
-            'order_state'     => 1,
-        ]);
-
-        // いいねデータを作成
-        // $favoritDatas = Favorit::create([
-        //     'user_id' => $purchaseItemData->user_id,
-        //     'item_id' => $favoritItemData->id,
-        // ]);
 
         // コメントデータを作成
         $commentDatas = Comment::create([
