@@ -31,11 +31,15 @@ $ docker-compose up -d --build
 ＊最初のビルドでは、完了までに時間を要す場合いがあります。  
 
 2. Laravelの設定等
-(1) 複製したリポジトリ内の src/.envファイルなどを編集していきます。
+(1) composerのインストールや複製したリポジトリ内の src/.envファイルなどを編集していきます。  
 ``` 
+docker-compose exec php bash
+cp .env.example .env
+```
+(2) .envファイルの編集
+``` .envファイルの中身
 
 ```
-
 () 実際にブラウザ上での動作確認のため、事前にユーザーデータを作成しています。  
 - ログイン用データ  
   email            password  
