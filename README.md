@@ -9,7 +9,7 @@
  
  
 ## 環境構築  
-1. Dockerビルド 
+1. Dockerビルド  
 (1) 導入したいディレクトリへ移動し、githubからリポジトリを複製
 ```
 git clone git@github.com:hirobot3103/furima-coachtech.git
