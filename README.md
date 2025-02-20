@@ -55,20 +55,33 @@ DB_DATABASE=frimas_db
 DB_USERNAME=frimas_user
 DB_PASSWORD=frimas_pass
 ```
+- さらに、ローカル環境でメール送信を行えるようmailtrapを利用します。(導入方法は https://qiita.com/kazumacchi/items/751232c538ff5a674b1a)
+```
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=設定されたUser名データ
+MAIL_PASSWORD=設定されたPasswordデータ
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
 (3).envファイルの編集が終ったら、暗号化キーを設定します。  
 -このコマンドは、Laravelアプリケーションの暗号化キーを生成します。このキーは、セッションデータの暗号化やその他のセキュリティ機能に使用されます。  
 ```
 docker-compose exec php bash
 php artisan key:generate
 exit
-```
+```  
+
 (4) データベースの作成
 - テーブルの構成や予め必要なデータを作成します。  
 ```
 docker-compose exec php bash
 php artisan migrate
 php artisan db:seed
-```  
+```
+
 (5)  実行  
 - 実際にアプリを利用する場合は、http://locaohost/　へアクセスしてください。  
 
