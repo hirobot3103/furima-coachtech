@@ -13,6 +13,12 @@ body {
   font-size: 1.6vw;
 }
 
+input[type="button"], 
+input[type="submit"],
+button {
+  cursor: pointer;
+}
+
 .page-header {
   display: flex;
   width: 100vw;

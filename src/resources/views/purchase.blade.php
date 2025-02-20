@@ -49,7 +49,7 @@
                     <p class="method__index">支払い方法</p>
                     <form class="method__form" action="">
                         <div class="select-triangle">&#x25BD;</div>
-                        <select name="" id="method_select" class="select-method">
+                        <select name="method_selector" id="method_select" class="select-method">
                             <option value="0" selected disabled>選択してください</option>
                             <option value="1" class="method-conbini">コンビニ払い</option>
                             <option value="2" class="method-card">カード払い</option>

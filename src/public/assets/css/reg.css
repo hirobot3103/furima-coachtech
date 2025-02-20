@@ -168,6 +168,7 @@ body {
     color:#fff;
     margin:2vw 0;
     text-align: center;
+    cursor: pointer;
 }
 
 .register-link {

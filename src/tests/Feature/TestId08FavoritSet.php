@@ -249,12 +249,6 @@ class TestId08FavoritSet extends TestCase
             'order_state'     => 1,
         ]);
 
-        // いいねデータを作成
-        // $favoritDatas = Favorit::create([
-        //     'user_id' => $purchaseItemData->user_id,
-        //     'item_id' => $favoritItemData->id,
-        // ]);
-
         // コメントデータを作成
         $commentDatas = Comment::create([
             'user_id' => $purchaseItemData->user_id,

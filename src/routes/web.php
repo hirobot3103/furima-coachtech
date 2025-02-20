@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage');
 
-    Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('store');
+    // Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('store');
     Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('updata');
     Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('prof');
 
