@@ -10,11 +10,25 @@
  
 ## 環境構築  
 1. Dockerビルド
+(1) 導入したいディレクトリへ移動し、githubからリポジトリを複製
 ```
-git clone git@github.com:hirobot3103/contact-form-fashionablylate.git
+git clone git@github.com:hirobot3103/furima-coachtech.git
 ```
-  (1)..env
-  
+(2) 個人が持つgithubアカウントでログインし、リモートリポジトリを作成
+(3) (1)で作成したディレクトリへ移動し、現在のローカルリポジトリのデータをリモートリポジトリに反映させる
+```
+git remote set-url origin 作成したリポジトリのurl
+```
+(2) 複製したリポジトリ内の src/.envファイルなどを編集していきます。
+```
+
+```
+
+
+## ER図
+- テーブル仕様書については、案件シート内に記載
+<img src="">
+
 
 
 
