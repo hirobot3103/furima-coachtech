@@ -9,7 +9,7 @@
  
  
 ## 環境構築  
-1. Dockerビルド
+1. Dockerビルド 
 (1) 導入したいディレクトリへ移動し、githubからリポジトリを複製
 ```
 git clone git@github.com:hirobot3103/furima-coachtech.git
@@ -25,6 +25,11 @@ git add .
 git commit -m "リモートリポジトリの変更"
 git push origin main
 ```
+(5). Dockerコマンドを入力し、開発環境を構築
+```
+$ docker-compose up -d --build
+```
+＊最初のビルドでは、完了までに時間を要す場合いがあります。  
 
 (2) 複製したリポジトリ内の src/.envファイルなどを編集していきます。
 ```
