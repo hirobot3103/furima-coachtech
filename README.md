@@ -14,7 +14,7 @@
 ```
 git clone git@github.com:hirobot3103/furima-coachtech.git
 ```
-(2) 個人が持つgithubアカウントでログインし、リモートリポジトリを作成
+(2) 個人が持つgithubアカウントでログインし、リモートリポジトリを作成  
 (3) (1)で作成したディレクトリへ移動し、現在のローカルリポジトリのデータをリモートリポジトリに反映させる。  
 ```
 git remote set-url origin 作成したリポジトリのurl
