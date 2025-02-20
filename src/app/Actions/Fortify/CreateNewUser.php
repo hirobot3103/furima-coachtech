@@ -17,6 +17,11 @@ class CreateNewUser implements CreatesNewUsers
 
     public function create(array $input): User
     {
+<<<<<<< HEAD
+        $registerRequestInstance = New RegisterRequest();
+        
+        Validator::make($input,
+=======
         $param = [
             'name'  => $input['name'],
             'email' => $input['email'],
@@ -26,6 +31,7 @@ class CreateNewUser implements CreatesNewUsers
 
         $registerRequestInstance = New RegisterRequest();
         Validator::make($param,
+>>>>>>> db7eefb0901e2a6b8f1295c49da99ea8e42c7aa3
                         $registerRequestInstance->rules(), 
                         $registerRequestInstance->messages(),
                         )->validate();

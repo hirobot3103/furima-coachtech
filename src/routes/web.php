@@ -9,6 +9,16 @@ use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellController;
 
+<<<<<<< HEAD
+// use App\Http\Controllers\Auth\LoginController;
+// use Laravel\Fortify\Fortify;
+
+// Fortify::ignoreRoutes();
+
+// Route::post('/login', [LoginController::class, 'store']);
+
+=======
+>>>>>>> db7eefb0901e2a6b8f1295c49da99ea8e42c7aa3
 Route::get('/', [ItemController::class,'index']);
 Route::get('/item/{itemId}', [ItemDetailController::class,'detail']);
 
