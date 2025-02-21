@@ -30,17 +30,11 @@
                     @endif
                     <p class="iteme-name-title">メールアドレス</p>
                     <input type="text" class="item-name" name="email" value="{{ old('email') }}">
-<<<<<<< HEAD
                     @if ($errors->has('email'))
                         @foreach($errors->get('email') as $errorMassage )
                             <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
                         @endforeach
                     @endif
-=======
-                    @error('email')
-                    <div>{{ $message }}</div>
-                    @enderror
->>>>>>> dfae482d2a9bff2985c4ae3696cc1e7bc9127f41
                     <p class="iteme-name-title">パスワード</p>
                     <input type="password" class="item-name" name="password">
                     @if ($errors->has('password'))
@@ -50,17 +44,11 @@
                     @endif
                     <p class="iteme-name-title">確認用パスワード</p>
                     <input type="password" class="item-prace" name="password_confirmation">
-<<<<<<< HEAD
                     @if ($errors->has('password_confirmation'))
                         @foreach($errors->get('password_confirmation') as $errorMassage )
                             <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
                         @endforeach
                     @endif
-=======
-                    @error('password')
-                    <div>{{ $message }}</div>
-                    @enderror
->>>>>>> dfae482d2a9bff2985c4ae3696cc1e7bc9127f41
                 </section>
                 <button class="item-post-btn" type="submit">登録する</button>
             </form>
