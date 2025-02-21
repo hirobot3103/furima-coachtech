@@ -23,7 +23,6 @@
                 <section class="item-detail-area">
                     <p class="iteme-name-title">メールアドレス</p>
                     <input type="text" class="item-name" name="email" value="{{ old( 'email' ) }}">
-<<<<<<< HEAD
                     @if ($errors->has('email'))
                         @foreach($errors->get('email') as $errorMassage )
                             <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
@@ -36,20 +35,6 @@
                             <li class="validatin-error__area">&#x274C;&emsp;{{$errorMassage}}</li> 
                         @endforeach
                     @endif
-=======
-<<<<<<< HEAD
-                    @error('email')
-                    <div>{{ $message }}</div>
-                    @enderror
-
-=======
->>>>>>> db7eefb0901e2a6b8f1295c49da99ea8e42c7aa3
-                    <p class="iteme-name-title">パスワード</p>
-                    <input type="password" class="item-prace" name="password">
-                    @error('password')
-                    <div>{{ $message }}</div>
-                    @enderror
->>>>>>> dfae482d2a9bff2985c4ae3696cc1e7bc9127f41
                 </section>
                 <button class="item-post-btn" type="submit">ログインする</button>
             </form>
